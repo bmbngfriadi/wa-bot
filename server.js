@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -929,6 +930,12 @@ app.delete('/api/medical/reset-budget/:id', authenticateToken, authorizePermissi
         console.error('Reset budget error:', error);
         res.status(500).json({ message: 'Gagal mereset budget.' });
     }
+});
+
+// --- SERVE STATIC REACT APP ---
+app.use(express.static(path.join(__dirname, 'client/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
