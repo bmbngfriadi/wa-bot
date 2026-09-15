@@ -6,7 +6,7 @@ import { Sun, Moon, Check, Monitor, Database, ShieldCheck, KeyRound, Lock } from
 
 const Settings = () => {
   const { user, theme, toggleTheme } = useContext(AuthContext);
-  const { showToast } = useContext(ToastContext);
+  const { showToast, showConfirm } = useContext(ToastContext);
 
   // Self Change Password Form State
   const [currentPassword, setCurrentPassword] = useState('');
@@ -31,6 +31,14 @@ const Settings = () => {
       setPassError('Password baru minimal 4 karakter.');
       return;
     }
+
+    const isConfirmed = await showConfirm({
+      title: 'Konfirmasi Ubah Password',
+      message: 'Apakah Anda yakin ingin mengubah password akun Anda?',
+      confirmText: 'Ya, Ubah Password',
+    });
+
+    if (!isConfirmed) return;
 
     setPassLoading(true);
     try {

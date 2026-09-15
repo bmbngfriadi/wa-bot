@@ -138,20 +138,20 @@ const MedicalPlafond = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)' }}>Medical Plafond</h1>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+      <div className="page-header">
+        <div className="page-header-info">
+          <h1>Medical Plafond</h1>
+          <p>
             Kelola budget rawat inap, rawat jalan, kacamata, dan persalinan karyawan.
           </p>
         </div>
-        {user?.role === 'administrator' && (
-          <div>
+        <div className="page-header-actions">
+          {user?.role === 'administrator' && (
             <button className="btn btn-danger" onClick={handleBulkResetBudget}>
               Bulk Reset Budget (Semua Data)
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div className="glass-card" style={{ marginBottom: '1.5rem', padding: '1.25rem' }}>
@@ -173,7 +173,7 @@ const MedicalPlafond = () => {
         </div>
       </div>
 
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="glass-card table-wrapper-card" style={{ padding: '0', overflow: 'hidden' }}>
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -206,35 +206,35 @@ const MedicalPlafond = () => {
 
                   return (
                     <tr key={emp.id}>
-                      <td>{index + 1}</td>
-                      <td>
+                      <td data-label="No">{index + 1}</td>
+                      <td data-label="Karyawan">
                         <div style={{ fontWeight: 600 }}>{emp.nama_lengkap}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{emp.nik}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{emp.department}</div>
                       </td>
-                      <td><span style={{ fontWeight: 'bold' }}>{emp.golongan}</span></td>
-                      <td style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Golongan"><span style={{ fontWeight: 'bold' }}>{emp.golongan}</span></td>
+                      <td data-label="Rawat Inap" style={{ fontSize: '0.85rem' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_inap_total)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Inap Total'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaInap)}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
                       </td>
-                      <td style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Rawat Jalan" style={{ fontSize: '0.85rem' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_jalan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Jalan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaJalan)}</div>
                       </td>
-                      <td style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Kacamata" style={{ fontSize: '0.85rem' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.kacamata)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Kacamata'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaKacamata)}</div>
                       </td>
-                      <td style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Persalinan" style={{ fontSize: '0.85rem' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.persalinan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Persalinan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaPersalinan)}</div>
                       </td>
-                      <td style={{ textAlign: 'center' }}>
+                      <td data-label="Aksi" style={{ textAlign: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'center' }}>
                           <button className="btn btn-secondary btn-sm" onClick={() => handleOpenHistory(emp)} style={{ width: '100%' }}>
                             <History size={14} /> Riwayat
@@ -288,10 +288,10 @@ const MedicalPlafond = () => {
                   <tbody>
                     {history.map((h) => (
                       <tr key={h.id}>
-                        <td>{new Date(h.tanggal).toLocaleDateString('id-ID')}</td>
-                        <td>{h.kategori}</td>
-                        <td style={{ color: '#ef4444', fontWeight: 600 }}>-{formatRp(h.nominal)}</td>
-                        <td>{h.pic_name || 'System'}</td>
+                        <td data-label="Tanggal">{new Date(h.tanggal).toLocaleDateString('id-ID')}</td>
+                        <td data-label="Kategori">{h.kategori}</td>
+                        <td data-label="Nominal" style={{ color: '#ef4444', fontWeight: 600 }}>-{formatRp(h.nominal)}</td>
+                        <td data-label="PIC (HR)">{h.pic_name || 'System'}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -299,7 +299,7 @@ const MedicalPlafond = () => {
               </div>
             )}
             
-            <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+            <div className="modal-actions">
               <button type="button" className="btn btn-secondary" onClick={() => setIsHistoryModalOpen(false)}>Tutup</button>
             </div>
           </div>
@@ -360,7 +360,7 @@ const MedicalPlafond = () => {
                 </div>
               )}
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsResetPassModalOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary" style={{ background: '#f59e0b', borderColor: '#f59e0b' }} disabled={resetPassLoading}>
                   {resetPassLoading ? 'Menyimpan...' : 'Simpan Perubahan'}

@@ -234,20 +234,22 @@ const UserAdmin = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)' }}>Manajemen User System (Administrator Only)</h1>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+      <div className="page-header">
+        <div className="page-header-info">
+          <h1>Manajemen User System (Administrator Only)</h1>
+          <p>
             Fitur CRUD Lengkap: Tambah user, <b>edit username</b>, ubah nama & hak akses, riset password, dan hapus akun.
           </p>
         </div>
-        <button className="btn btn-primary" onClick={handleOpenAdd}>
-          <UserPlus size={18} />
-          Tambah User Baru
-        </button>
+        <div className="page-header-actions">
+          <button className="btn btn-primary" onClick={handleOpenAdd}>
+            <UserPlus size={18} />
+            Tambah User Baru
+          </button>
+        </div>
       </div>
 
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="glass-card table-wrapper-card" style={{ padding: '0', overflow: 'hidden' }}>
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -269,12 +271,12 @@ const UserAdmin = () => {
                 </tr>
               ) : usersList.map((usr, idx) => (
                 <tr key={usr.id}>
-                  <td>{idx + 1}</td>
-                  <td style={{ fontWeight: 600 }}>{usr.nama}</td>
-                  <td style={{ fontFamily: 'monospace', color: 'var(--primary-500)', fontWeight: 700 }}>@{usr.username}</td>
-                  <td>{getRoleBadge(usr.role)}</td>
-                  <td>{renderPermissionPills(usr.permissions)}</td>
-                  <td style={{ textAlign: 'center' }}>
+                  <td data-label="No">{idx + 1}</td>
+                  <td data-label="Nama Lengkap" style={{ fontWeight: 600 }}>{usr.nama}</td>
+                  <td data-label="Username" style={{ fontFamily: 'monospace', color: 'var(--primary-500)', fontWeight: 700 }}>@{usr.username}</td>
+                  <td data-label="Role Utama">{getRoleBadge(usr.role)}</td>
+                  <td data-label="Checklist Fitur Aktif">{renderPermissionPills(usr.permissions)}</td>
+                  <td data-label="Aksi CRUD" style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
                       {/* Edit Username, Nama & Role/Perms */}
                       <button
@@ -301,15 +303,17 @@ const UserAdmin = () => {
                       {/* Delete User */}
                       {usr.id !== currentUser?.id ? (
                         <button
-                          className="btn btn-danger btn-sm btn-icon"
+                          className="btn btn-danger btn-sm"
                           onClick={() => handleDeleteUser(usr.id, usr.username)}
                           title="Hapus User"
                         >
                           <Trash2 size={15} />
+                          Hapus
                         </button>
                       ) : (
-                        <button className="btn btn-secondary btn-sm btn-icon" disabled title="Tidak dapat menghapus akun sendiri">
+                        <button className="btn btn-secondary btn-sm" disabled title="Tidak dapat menghapus akun sendiri">
                           <Trash2 size={15} color="#6b7280" />
+                          Hapus
                         </button>
                       )}
                     </div>
@@ -399,7 +403,7 @@ const UserAdmin = () => {
                 <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>
                   Checklist Rincian Fitur Yang Diizinkan:
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
+                <div className="form-grid-2" style={{ gap: '0.65rem' }}>
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.view} onChange={() => handlePermissionToggle('view')} />
                     <span>Lihat & Cari Karyawan</span>
@@ -451,7 +455,7 @@ const UserAdmin = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsAddUserOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Buat Akun User</button>
               </div>
@@ -528,7 +532,7 @@ const UserAdmin = () => {
                 <label style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem', display: 'block' }}>
                   Checklist Rincian Akses Fitur Khusus:
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
+                <div className="form-grid-2" style={{ gap: '0.65rem' }}>
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.view} onChange={() => handlePermissionToggle('view')} />
                     <span style={{ fontSize: '0.85rem' }}>Lihat & Cari Karyawan</span>
@@ -589,7 +593,7 @@ const UserAdmin = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsEditUserOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Simpan Perubahan</button>
               </div>
@@ -630,7 +634,7 @@ const UserAdmin = () => {
                 />
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsResetPassOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Simpan Password Baru</button>
               </div>

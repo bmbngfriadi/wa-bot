@@ -297,17 +297,17 @@ const MedicalHistory = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)' }}>Medical History</h1>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+      <div className="page-header">
+        <div className="page-header-info">
+          <h1>Medical History</h1>
+          <p>
             Daftar seluruh riwayat transaksi plafond kesehatan karyawan.
           </p>
         </div>
         
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div className="page-header-actions">
           {hasExportPermission && (
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'var(--input-bg)', padding: '0.25rem 0.5rem', borderRadius: 'var(--border-radius)', border: '1px solid var(--border-color)' }}>
+            <div className="history-filter-box">
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Filter:</span>
               <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8rem' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>s/d</span>
@@ -320,14 +320,14 @@ const MedicalHistory = () => {
           )}
           
           {isEditAllowed && (
-            <button className="btn btn-primary" onClick={handleOpenAddModal} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button className="btn btn-primary" onClick={handleOpenAddModal}>
               <Plus size={18} /> Add Medical History
             </button>
           )}
         </div>
       </div>
 
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="glass-card table-wrapper-card" style={{ padding: '0', overflow: 'hidden' }}>
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -355,16 +355,16 @@ const MedicalHistory = () => {
               ) : (
                 filteredHistory.map((h, index) => (
                   <tr key={h.id} onClick={() => handleRowClick(h)} style={{ cursor: 'pointer' }} className="table-row-hover">
-                    <td>{index + 1}</td>
-                    <td>{new Date(h.tanggal).toLocaleDateString('id-ID')}</td>
-                    <td>
+                    <td data-label="No">{index + 1}</td>
+                    <td data-label="Tanggal">{new Date(h.tanggal).toLocaleDateString('id-ID')}</td>
+                    <td data-label="Karyawan">
                       <div style={{ fontWeight: 600 }}>{h.nama_lengkap}</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{h.nik}</div>
                     </td>
-                    <td><span style={{ fontWeight: 600 }}>{h.kategori}</span></td>
-                    <td style={{ color: '#ef4444', fontWeight: 600 }}>-{formatRp(h.nominal)}</td>
-                    <td style={{ fontSize: '0.85rem' }}>{h.deskripsi || '-'}</td>
-                    <td>
+                    <td data-label="Kategori"><span style={{ fontWeight: 600 }}>{h.kategori}</span></td>
+                    <td data-label="Nominal" style={{ color: '#ef4444', fontWeight: 600 }}>-{formatRp(h.nominal)}</td>
+                    <td data-label="Deskripsi" style={{ fontSize: '0.85rem' }}>{h.deskripsi || '-'}</td>
+                    <td data-label="Bukti Foto">
                       {h.foto_bukti ? (
                         <button 
                           onClick={(e) => { e.stopPropagation(); setSelectedPhoto(h.foto_bukti); setPhotoViewerOpen(true); }}
@@ -377,18 +377,20 @@ const MedicalHistory = () => {
                         <span style={{ color: 'var(--text-muted)' }}>-</span>
                       )}
                     </td>
-                    <td style={{ fontSize: '0.85rem' }}>{h.pic_name || 'System'}</td>
+                    <td data-label="PIC (HR)" style={{ fontSize: '0.85rem' }}>{h.pic_name || 'System'}</td>
                     {(hasEditPermission || hasDeletePermission) && (
-                      <td style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
+                      <td data-label="Aksi" style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
                         <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
                           {hasEditPermission && (
-                            <button className="btn btn-secondary btn-sm btn-icon" onClick={(e) => handleOpenEditModal(h, e)} title="Edit Transaksi">
-                              <Edit size={14} color="var(--primary-500)" />
+                            <button className="btn btn-secondary btn-sm" onClick={(e) => handleOpenEditModal(h, e)} title="Edit Transaksi">
+                              <Edit size={15} color="var(--primary-500)" />
+                              Edit
                             </button>
                           )}
                           {hasDeletePermission && (
-                            <button className="btn btn-danger btn-sm btn-icon" onClick={(e) => handleDelete(h, e)} title="Hapus Transaksi">
-                              <Trash2 size={14} />
+                            <button className="btn btn-danger btn-sm" onClick={(e) => handleDelete(h, e)} title="Hapus Transaksi">
+                              <Trash2 size={15} />
+                              Hapus
                             </button>
                           )}
                         </div>
@@ -559,7 +561,7 @@ const MedicalHistory = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsDeductModalOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary" disabled={deductLoading || !selectedKaryawan}>
                   {deductLoading ? 'Menyimpan...' : 'Simpan Transaksi'}
@@ -590,7 +592,7 @@ const MedicalHistory = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label>Kategori Claim</label>
                   <select 
@@ -668,7 +670,7 @@ const MedicalHistory = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsEditModalOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary" disabled={deductLoading}>
                   {deductLoading ? 'Menyimpan...' : 'Simpan Perubahan'}
@@ -725,7 +727,7 @@ const MedicalHistory = () => {
               )}
             </div>
             
-            <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+            <div className="modal-actions">
               <button className="btn btn-primary" onClick={() => setIsDetailModalOpen(false)}>Tutup</button>
             </div>
           </div>
@@ -736,7 +738,7 @@ const MedicalHistory = () => {
       {photoViewerOpen && selectedPhoto && (
         <div className="modal-overlay" onClick={() => setPhotoViewerOpen(false)} style={{ zIndex: 1100 }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ background: 'transparent', boxShadow: 'none', border: 'none', maxWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem' }}>
+            <div className="modal-actions" style={{ marginTop: 0, marginBottom: '0.5rem' }}>
               <button 
                 onClick={() => setPhotoViewerOpen(false)}
                 style={{ background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', display: 'flex' }}

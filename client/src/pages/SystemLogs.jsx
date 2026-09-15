@@ -78,22 +78,24 @@ const SystemLogs = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div className="page-header">
+        <div className="page-header-info">
+          <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Activity size={24} color="var(--primary-500)" />
             System Activity Logs
           </h1>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+          <p>
             Memantau seluruh aktivitas perubahan data (CRUD) dan login di dalam sistem secara real-time. (Maks 500 log terakhir)
           </p>
         </div>
-        <button className="btn btn-secondary" onClick={fetchLogs} disabled={loading}>
-          {loading ? 'Memuat...' : 'Refresh Logs'}
-        </button>
+        <div className="page-header-actions">
+          <button className="btn btn-secondary" onClick={fetchLogs} disabled={loading}>
+            {loading ? 'Memuat...' : 'Refresh Logs'}
+          </button>
+        </div>
       </div>
 
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="glass-card table-wrapper-card" style={{ padding: '0', overflow: 'hidden' }}>
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -121,16 +123,16 @@ const SystemLogs = () => {
               ) : (
                 logs.map((log, idx) => (
                   <tr key={log.id}>
-                    <td style={{ color: 'var(--text-muted)' }}>{idx + 1}</td>
-                    <td style={{ whiteSpace: 'nowrap' }}>
+                    <td data-label="No" style={{ color: 'var(--text-muted)' }}>{idx + 1}</td>
+                    <td data-label="Waktu / Tanggal" style={{ whiteSpace: 'nowrap' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
                         <Clock size={14} />
                         {formatDate(log.created_at)}
                       </div>
                     </td>
-                    <td>{getActionBadge(log.action)}</td>
-                    <td style={{ fontWeight: 500 }}>{log.description}</td>
-                    <td>
+                    <td data-label="Aksi (Action)">{getActionBadge(log.action)}</td>
+                    <td data-label="Deskripsi Aktivitas" style={{ fontWeight: 500 }}>{log.description}</td>
+                    <td data-label="Pelaku (Actor)">
                       {log.actor_username ? (
                         <div>
                           <div style={{ fontWeight: 600 }}>{log.actor_name}</div>

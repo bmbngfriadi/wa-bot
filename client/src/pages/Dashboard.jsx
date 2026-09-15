@@ -46,7 +46,7 @@ const Dashboard = () => {
   // Modals
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
 
@@ -368,13 +368,6 @@ const Dashboard = () => {
     setIsEditModalOpen(true);
   };
 
-  // Open Delete Modal
-  const handleOpenDelete = (emp) => {
-    setSelectedEmp(emp);
-    setFormError('');
-    setIsDeleteModalOpen(true);
-  };
-
   // Submit Add
   const handleAddSubmit = async (e) => {
     e.preventDefault();
@@ -403,30 +396,38 @@ const Dashboard = () => {
     }
   };
 
-  // Submit Hard Delete
-  const handleDeleteSubmit = async () => {
-    setFormError('');
-    try {
-      await api.delete(`/karyawan/${selectedEmp.id}`);
-      setIsDeleteModalOpen(false);
-      showToast(`Karyawan '${selectedEmp.nama_lengkap}' berhasil dihapus permanen.`, 'success');
-      fetchEmployees();
-    } catch (err) {
-      setFormError(err.response?.data?.message || 'Gagal menghapus karyawan.');
+  // Submit Hard Delete via Confirm Modal
+  const handleOpenDelete = async (emp) => {
+    const isConfirmed = await showConfirm({
+      title: 'Konfirmasi Hapus Data',
+      message: `Apakah Anda yakin ingin menghapus data Karyawan "${emp.nama_lengkap}" secara permanen? Data yang dihapus tidak dapat dikembalikan.`,
+      confirmText: 'Ya, Hapus Permanen',
+      confirmColor: 'var(--danger-color)',
+    });
+    
+    if (isConfirmed) {
+      try {
+        await api.delete(`/karyawan/${emp.id}`);
+        showToast(`Karyawan '${emp.nama_lengkap}' berhasil dihapus permanen.`, 'success');
+        fetchEmployees();
+      } catch (err) {
+        showToast(err.response?.data?.message || 'Gagal menghapus karyawan.', 'error');
+      }
     }
   };
 
   return (
     <div>
       {/* Top Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)' }}>Manajemen Data Karyawan</h1>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+      <div className="page-header">
+        <div className="page-header-info">
+          <h1>Manajemen Data Karyawan</h1>
+          <p>
             Kelola data karyawan PT Cemindo Gemilang Tbk - Plant Batam (Terintegrasi Real-Time WhatsApp Bot)
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+        
+        <div className="page-header-actions">
           {(selectedIds.length > 0 || isSelectAllFiltered) && isBulkDeleteAllowed && (
             <button className="btn btn-danger" onClick={handleBulkDelete}>
               <Trash2 size={18} />
@@ -594,7 +595,7 @@ const Dashboard = () => {
       )}
 
       {/* Employee Data Table */}
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="glass-card table-wrapper-card" style={{ padding: '0', overflow: 'hidden' }}>
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -640,7 +641,7 @@ const Dashboard = () => {
                   return (
                     <tr key={emp.id} style={{ backgroundColor: isSelected ? 'rgba(181, 29, 34, 0.08)' : 'transparent' }}>
                       {isBulkDeleteAllowed && (
-                        <td style={{ textAlign: 'center' }}>
+                        <td data-label="Pilih" style={{ textAlign: 'center' }}>
                           <input
                             type="checkbox"
                             checked={isSelected}
@@ -649,10 +650,10 @@ const Dashboard = () => {
                           />
                         </td>
                       )}
-                      <td>{(page - 1) * 10 + index + 1}</td>
-                      <td style={{ fontWeight: 700, fontFamily: 'monospace', color: 'var(--primary-500)' }}>{emp.nik}</td>
-                      <td style={{ fontWeight: 600 }}>{emp.nama_lengkap}</td>
-                      <td>
+                      <td data-label="No">{(page - 1) * 10 + index + 1}</td>
+                      <td data-label="NIK" style={{ fontWeight: 700, fontFamily: 'monospace', color: 'var(--primary-500)' }}>{emp.nik}</td>
+                      <td data-label="Nama Lengkap" style={{ fontWeight: 600 }}>{emp.nama_lengkap}</td>
+                      <td data-label="Jenis Kelamin">
                         <span style={{
                           fontSize: '0.8rem',
                           fontWeight: 600,
@@ -665,20 +666,20 @@ const Dashboard = () => {
                           {emp.jenis_kelamin || 'Laki-laki'}
                         </span>
                       </td>
-                      <td>{emp.department}</td>
-                      <td><span style={{fontWeight: 'bold', color: 'var(--primary-500)'}}>{emp.golongan || '4 (A-B)'}</span></td>
-                      <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
+                      <td data-label="Department">{emp.department}</td>
+                      <td data-label="Golongan"><span style={{fontWeight: 'bold', color: 'var(--primary-500)'}}>{emp.golongan || '4 (A-B)'}</span></td>
+                      <td data-label="Keluarga" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '2px' }}>Istri : {emp.nama_istri || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 1 : {emp.nama_anak_pertama || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 2 : {emp.nama_anak_kedua || '-'}</div>
                         <div>Anak 3 : {emp.nama_anak_ketiga || '-'}</div>
                       </td>
-                      <td>
+                      <td data-label="Status">
                         <span className={`badge ${emp.status === 'Aktif' ? 'badge-aktif' : 'badge-nonaktif'}`}>
                           {emp.status}
                         </span>
                       </td>
-                      <td style={{ textAlign: 'center' }}>
+                      <td data-label="Aksi" style={{ textAlign: 'center' }}>
                         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
                           {/* Edit Status & Data Button */}
                           {isEditAllowed ? (
@@ -849,7 +850,7 @@ const Dashboard = () => {
                 </div>
               )}
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsImportModalOpen(false)}>Tutup</button>
                 <button type="submit" className="btn btn-primary" disabled={importLoading || importData.length === 0}>
                   {importLoading ? 'Memproses Impor...' : `Proses Impor (${importData.length} Baris)`}
@@ -1000,7 +1001,7 @@ const Dashboard = () => {
                 </select>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsAddModalOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Simpan Karyawan</button>
               </div>
@@ -1147,7 +1148,7 @@ const Dashboard = () => {
                 </select>
               </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <div className="modal-actions">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsEditModalOpen(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Update Data</button>
               </div>
@@ -1155,46 +1156,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-
-      {/* --- MODAL: HARD DELETE --- */}
-      {isDeleteModalOpen && selectedEmp && (
-        <div className="modal-overlay" onClick={() => setIsDeleteModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#ef4444' }}>
-                <AlertTriangle size={24} />
-                <h3>Konfirmasi Hard Delete (Permanen)</h3>
-              </div>
-              <button className="close-btn" onClick={() => setIsDeleteModalOpen(false)}><X size={20} /></button>
-            </div>
-
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
-
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.25rem' }}>
-              Apakah Anda yakin ingin menghapus data karyawan berikut secara <b>Permanen (Hard Delete)</b> dari database?
-            </p>
-
-            <div style={{ background: 'var(--input-bg)', padding: '1rem', borderRadius: '4px', marginBottom: '1.5rem' }}>
-              <div><b>Nama:</b> {selectedEmp.nama_lengkap}</div>
-              <div><b>NIK:</b> {selectedEmp.nik}</div>
-              <div><b>Jenis Kelamin:</b> {selectedEmp.jenis_kelamin || 'Laki-laki'}</div>
-              <div><b>Keluarga:</b> {selectedEmp.nama_istri ? `Istri: ${selectedEmp.nama_istri}` : '-'}</div>
-              <div><b>Department:</b> {selectedEmp.department}</div>
-              <div><b>Status saat ini:</b> {selectedEmp.status}</div>
-            </div>
-
-            <p style={{ fontSize: '0.8rem', color: '#ef4444', marginBottom: '1.5rem', fontWeight: 600 }}>
-              ⚠️ PERHATIAN: Data akan langsung dihapus fisik dari database MySQL dan tidak dapat dikembalikan lagi!
-            </p>
-
-            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
-              <button type="button" className="btn btn-secondary" onClick={() => setIsDeleteModalOpen(false)}>Batal</button>
-              <button type="button" className="btn btn-danger" onClick={handleDeleteSubmit}>Ya, Hapus Permanen</button>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 };
