@@ -554,7 +554,7 @@ const Dashboard = () => {
           display: 'flex',
           justify: 'space-between',
           alignItems: 'center',
-          fontSize: '0.875rem',
+          fontSize: '0.875em',
           color: 'var(--text-main)',
           flexWrap: 'wrap',
           gap: '0.75rem'
@@ -655,7 +655,7 @@ const Dashboard = () => {
                       <td data-label="Nama Lengkap" style={{ fontWeight: 600 }}>{emp.nama_lengkap}</td>
                       <td data-label="Jenis Kelamin">
                         <span style={{
-                          fontSize: '0.8rem',
+                          fontSize: '0.8em',
                           fontWeight: 600,
                           padding: '0.2rem 0.6rem',
                           borderRadius: '4px',
@@ -668,7 +668,7 @@ const Dashboard = () => {
                       </td>
                       <td data-label="Department">{emp.department}</td>
                       <td data-label="Golongan"><span style={{fontWeight: 'bold', color: 'var(--primary-500)'}}>{emp.golongan || '4 (A-B)'}</span></td>
-                      <td data-label="Keluarga" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
+                      <td data-label="Keluarga" style={{ fontSize: '0.8em', color: 'var(--text-muted)', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '2px' }}>Istri : {emp.nama_istri || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 1 : {emp.nama_anak_pertama || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 2 : {emp.nama_anak_kedua || '-'}</div>
@@ -734,7 +734,7 @@ const Dashboard = () => {
 
         {/* Pagination Footer */}
         <div style={{ padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '1rem' }}>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.85em', color: 'var(--text-muted)' }}>
             Menampilkan <b>{employees.length}</b> dari <b>{pagination.totalRows}</b> total karyawan (Halaman {pagination.page} dari {pagination.totalPages})
           </span>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -771,8 +771,8 @@ const Dashboard = () => {
             {/* Template Download Prompt */}
             <div style={{ background: 'var(--input-bg)', border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
-                <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Belum punya format file?</div>
-                <div style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>Unduh template Excel resmi (termasuk kolom Jenis Kelamin & Join Date).</div>
+                <div style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-main)' }}>Belum punya format file?</div>
+                <div style={{ fontSize: '0.775em', color: 'var(--text-muted)' }}>Unduh template Excel resmi (termasuk kolom Jenis Kelamin & Join Date).</div>
               </div>
               <button className="btn btn-secondary btn-sm" onClick={handleDownloadTemplate} style={{ color: 'var(--primary-500)' }}>
                 <Download size={15} /> Unduh Template
@@ -780,18 +780,18 @@ const Dashboard = () => {
             </div>
 
             {importError && (
-              <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#f87171', padding: '0.75rem 1rem', borderRadius: '4px', fontSize: '0.85rem', marginBottom: '1rem' }}>
+              <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#f87171', padding: '0.75rem 1rem', borderRadius: '4px', fontSize: '0.85em', marginBottom: '1rem' }}>
                 {importError}
               </div>
             )}
 
             {importResult && (
-              <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', padding: '1rem', borderRadius: '4px', fontSize: '0.85rem', marginBottom: '1rem' }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', padding: '1rem', borderRadius: '4px', fontSize: '0.85em', marginBottom: '1rem' }}>
                 <div style={{ fontWeight: 700, marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <FileCheck size={18} /> {importResult.message}
                 </div>
                 {importResult.errorList && importResult.errorList.length > 0 && (
-                  <div style={{ marginTop: '0.5rem', maxHeight: '100px', overflowY: 'auto', fontSize: '0.775rem', color: '#fca5a5' }}>
+                  <div style={{ marginTop: '0.5rem', maxHeight: '100px', overflowY: 'auto', fontSize: '0.775em', color: '#fca5a5' }}>
                     {importResult.errorList.map((errItem, idx) => (
                       <div key={idx}>• {errItem}</div>
                     ))}
@@ -815,11 +815,11 @@ const Dashboard = () => {
               {/* Data Preview Table */}
               {importData.length > 0 && (
                 <div style={{ marginBottom: '1.25rem' }}>
-                  <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+                  <div style={{ fontSize: '0.825em', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
                     Pratinjau Data Impor ({importData.length} baris terdeteksi):
                   </div>
                   <div style={{ maxHeight: '160px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '4px' }}>
-                    <table className="data-table" style={{ fontSize: '0.8rem' }}>
+                    <table className="data-table" style={{ fontSize: '0.8em' }}>
                       <thead>
                         <tr>
                           <th>NIK</th>
@@ -843,7 +843,7 @@ const Dashboard = () => {
                     </table>
                   </div>
                   {importData.length > 5 && (
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '0.3rem', textAlign: 'right' }}>
+                    <div style={{ fontSize: '0.75em', color: 'var(--text-dim)', marginTop: '0.3rem', textAlign: 'right' }}>
                       ... dan {importData.length - 5} baris data lainnya.
                     </div>
                   )}
@@ -870,7 +870,7 @@ const Dashboard = () => {
               <button className="close-btn" onClick={() => setIsAddModalOpen(false)}><X size={20} /></button>
             </div>
 
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
+            {formError && <div style={{ color: '#f87171', fontSize: '0.85em', marginBottom: '1rem' }}>{formError}</div>}
 
             <form onSubmit={handleAddSubmit}>
               <div className="form-group">
@@ -1019,7 +1019,7 @@ const Dashboard = () => {
               <button className="close-btn" onClick={() => setIsEditModalOpen(false)}><X size={20} /></button>
             </div>
 
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
+            {formError && <div style={{ color: '#f87171', fontSize: '0.85em', marginBottom: '1rem' }}>{formError}</div>}
 
             <form onSubmit={handleEditSubmit}>
               <div className="form-group">

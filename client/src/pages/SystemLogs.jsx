@@ -50,7 +50,7 @@ const SystemLogs = () => {
 
     return (
       <span style={{
-        fontSize: '0.75rem',
+        fontSize: '0.75em',
         fontWeight: 700,
         padding: '0.2rem 0.5rem',
         borderRadius: '6px',
@@ -125,7 +125,7 @@ const SystemLogs = () => {
                   <tr key={log.id}>
                     <td data-label="No" style={{ color: 'var(--text-muted)' }}>{idx + 1}</td>
                     <td data-label="Waktu / Tanggal" style={{ whiteSpace: 'nowrap' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85em' }}>
                         <Clock size={14} />
                         {formatDate(log.created_at)}
                       </div>
@@ -136,7 +136,7 @@ const SystemLogs = () => {
                       {log.actor_username ? (
                         <div>
                           <div style={{ fontWeight: 600 }}>{log.actor_name}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--primary-500)', fontFamily: 'monospace' }}>@{log.actor_username}</div>
+                          <div style={{ fontSize: '0.75em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>@{log.actor_username}</div>
                         </div>
                       ) : (
                         <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>System / User Dihapus</span>

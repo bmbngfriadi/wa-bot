@@ -68,8 +68,8 @@ const Login = () => {
               style={{ height: '65px', objectFit: 'contain', maxWidth: '100%' }}
             />
           </div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>HRGA Web Portal</h2>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+          <h2 style={{ fontSize: '1.5em', fontWeight: 800, color: 'var(--text-main)' }}>HRGA Web Portal</h2>
+          <p style={{ fontSize: '0.85em', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
             PT Cemindo Gemilang Tbk - Plant Batam
           </p>
         </div>
@@ -77,12 +77,12 @@ const Login = () => {
         {isForgotPassword ? (
           <>
             {resetMessage && (
-              <div style={{ background: '#c6f6d5', color: '#22543d', padding: '0.85rem 1rem', borderRadius: '6px', fontSize: '0.85rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+              <div style={{ background: '#c6f6d5', color: '#22543d', padding: '0.85rem 1rem', borderRadius: '6px', fontSize: '0.85em', marginBottom: '1.5rem', textAlign: 'center' }}>
                 {resetMessage}
               </div>
             )}
             {resetError && (
-              <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '6px', padding: '0.85rem 1rem', color: '#dc2626', fontSize: '0.85rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+              <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '6px', padding: '0.85rem 1rem', color: '#dc2626', fontSize: '0.85em', marginBottom: '1.5rem', textAlign: 'center' }}>
                 {resetError}
               </div>
             )}
@@ -103,7 +103,7 @@ const Login = () => {
               </button>
             </form>
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-              <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--primary-color)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }} onClick={() => setIsForgotPassword(false)}>
+              <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--primary-color)', cursor: 'pointer', fontSize: '0.85em', fontWeight: 600 }} onClick={() => setIsForgotPassword(false)}>
                 Kembali ke Login
               </button>
             </div>
@@ -117,7 +117,7 @@ const Login = () => {
                 borderRadius: '6px',
                 padding: '0.85rem 1rem',
                 color: '#dc2626',
-                fontSize: '0.85rem',
+                fontSize: '0.85em',
                 marginBottom: '1.5rem',
                 textAlign: 'center'
               }}>
@@ -152,21 +152,21 @@ const Login = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                style={{ width: '100%', padding: '0.9rem', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '0.9rem', fontSize: '0.95em' }}
                 disabled={loading}
               >
                 {loading ? 'Memproses Authentikasi...' : <>Masuk ke Sistem <ArrowRight size={18} /></>}
               </button>
             </form>
             <div style={{ textAlign: 'right', marginTop: '0.75rem' }}>
-              <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85rem' }} onClick={() => setIsForgotPassword(true)}>
+              <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85em' }} onClick={() => setIsForgotPassword(true)}>
                 Lupa Password?
               </button>
             </div>
           </>
         )}
 
-        <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+        <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.75em', color: 'var(--text-dim)' }}>
           © 2026 PT Cemindo Gemilang Tbk - Plant Batam
         </div>
 

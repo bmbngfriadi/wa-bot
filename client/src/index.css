@@ -419,7 +419,7 @@ body {
   border-collapse: separate;
   border-spacing: 0;
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 1.05rem; /* Increased base font size for better readability */
   white-space: nowrap;
 }
 
@@ -430,7 +430,7 @@ body {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
   text-transform: uppercase;
-  font-size: 0.725rem;
+  font-size: 0.85rem; /* Increased table header font size */
   letter-spacing: 0.05em;
 }
 
@@ -777,14 +777,15 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
-    padding: 0.75rem;
+    padding: 0; /* Remove tr padding so td can span full width */
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    overflow: hidden; /* Keep border-radius working */
   }
   .data-table tr:hover {
     background: var(--bg-card); /* Keep static on mobile */
   }
   .data-table td {
-    padding: 0.75rem 0.25rem;
+    padding: 1rem 1.25rem; /* Use td padding to span nicely to the edges */
     display: flex;
     flex-direction: column; /* Changed to column to fix offside/overflow */
     align-items: flex-start;
@@ -795,6 +796,7 @@ body {
     word-break: break-word;
     width: 100%;
     overflow: hidden;
+    font-size: 1.15rem; /* Significantly larger base font on mobile */
   }
   .data-table td:last-child {
     border-bottom: none;
@@ -802,8 +804,10 @@ body {
   .data-table td::before {
     content: attr(data-label);
     font-weight: 700;
-    color: var(--text-muted);
-    font-size: 0.75rem;
+    color: var(--primary-500); /* Use primary color for better contrast */
+    font-size: 0.9rem; /* Increase label size */
+    letter-spacing: 0.5px;
+    margin-bottom: 0.1rem;
     text-transform: uppercase;
     text-align: left;
     flex-shrink: 0;

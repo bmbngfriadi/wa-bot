@@ -209,27 +209,27 @@ const MedicalPlafond = () => {
                       <td data-label="No">{index + 1}</td>
                       <td data-label="Karyawan">
                         <div style={{ fontWeight: 600 }}>{emp.nama_lengkap}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{emp.nik}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{emp.department}</div>
+                        <div style={{ fontSize: '0.8em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{emp.nik}</div>
+                        <div style={{ fontSize: '0.75em', color: 'var(--text-muted)' }}>{emp.department}</div>
                       </td>
                       <td data-label="Golongan"><span style={{ fontWeight: 'bold' }}>{emp.golongan}</span></td>
-                      <td data-label="Rawat Inap" style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Rawat Inap" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_inap_total)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Inap Total'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaInap)}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
+                        <div style={{ fontSize: '0.75em', color: 'var(--text-muted)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
                       </td>
-                      <td data-label="Rawat Jalan" style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Rawat Jalan" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_jalan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Jalan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaJalan)}</div>
                       </td>
-                      <td data-label="Kacamata" style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Kacamata" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.kacamata)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Kacamata'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaKacamata)}</div>
                       </td>
-                      <td data-label="Persalinan" style={{ fontSize: '0.85rem' }}>
+                      <td data-label="Persalinan" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.persalinan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Persalinan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaPersalinan)}</div>
@@ -318,7 +318,7 @@ const MedicalPlafond = () => {
               <button className="close-btn" onClick={() => setIsResetPassModalOpen(false)}><X size={20} /></button>
             </div>
 
-            <div style={{ background: 'var(--input-bg)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', fontSize: '0.9rem' }}>
+            <div style={{ background: 'var(--input-bg)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', fontSize: '0.9em' }}>
               <div><b>Nama:</b> {selectedEmp.nama_lengkap} ({selectedEmp.nik})</div>
             </div>
 

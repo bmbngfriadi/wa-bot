@@ -308,10 +308,10 @@ const MedicalHistory = () => {
         <div className="page-header-actions">
           {hasExportPermission && (
             <div className="history-filter-box">
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Filter:</span>
-              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8rem' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>s/d</span>
-              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8rem' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
+              <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>Filter:</span>
+              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
+              <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>s/d</span>
+              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
               
               <button className="btn btn-secondary" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981', padding: '0.4rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Download size={14} /> Export Excel
@@ -359,17 +359,17 @@ const MedicalHistory = () => {
                     <td data-label="Tanggal">{new Date(h.tanggal).toLocaleDateString('id-ID')}</td>
                     <td data-label="Karyawan">
                       <div style={{ fontWeight: 600 }}>{h.nama_lengkap}</div>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{h.nik}</div>
+                      <div style={{ fontSize: '0.8em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{h.nik}</div>
                     </td>
                     <td data-label="Kategori"><span style={{ fontWeight: 600 }}>{h.kategori}</span></td>
                     <td data-label="Nominal" style={{ color: '#ef4444', fontWeight: 600 }}>-{formatRp(h.nominal)}</td>
-                    <td data-label="Deskripsi" style={{ fontSize: '0.85rem' }}>{h.deskripsi || '-'}</td>
+                    <td data-label="Deskripsi" style={{ fontSize: '0.85em' }}>{h.deskripsi || '-'}</td>
                     <td data-label="Bukti Foto">
                       {h.foto_bukti ? (
                         <button 
                           onClick={(e) => { e.stopPropagation(); setSelectedPhoto(h.foto_bukti); setPhotoViewerOpen(true); }}
                           className="btn btn-secondary btn-sm"
-                          style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }}
+                          style={{ padding: '0.2rem 0.5rem', fontSize: '0.75em' }}
                         >
                           <Eye size={14} /> Lihat Foto
                         </button>
@@ -377,7 +377,7 @@ const MedicalHistory = () => {
                         <span style={{ color: 'var(--text-muted)' }}>-</span>
                       )}
                     </td>
-                    <td data-label="PIC (HR)" style={{ fontSize: '0.85rem' }}>{h.pic_name || 'System'}</td>
+                    <td data-label="PIC (HR)" style={{ fontSize: '0.85em' }}>{h.pic_name || 'System'}</td>
                     {(hasEditPermission || hasDeletePermission) && (
                       <td data-label="Aksi" style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
                         <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
@@ -425,7 +425,7 @@ const MedicalHistory = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--sidebar-bg)', padding: '0.75rem 1rem', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
                     <div>
                       <div style={{ fontWeight: 600 }}>{selectedKaryawan.nama_lengkap}</div>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedKaryawan.nik} - Golongan: {selectedKaryawan.golongan}</div>
+                      <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>{selectedKaryawan.nik} - Golongan: {selectedKaryawan.golongan}</div>
                     </div>
                     <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setSelectedKaryawan(null); setSearchKaryawan(''); }}>
                       Ganti
@@ -474,7 +474,7 @@ const MedicalHistory = () => {
                               className="dropdown-item-hover"
                             >
                               <div style={{ fontWeight: 600 }}>{k.nama_lengkap}</div>
-                              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{k.nik} - Gol. {k.golongan}</div>
+                              <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>{k.nik} - Gol. {k.golongan}</div>
                             </div>
                           ))
                         ) : (
@@ -694,7 +694,7 @@ const MedicalHistory = () => {
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.9rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.9em' }}>
                 <span style={{ color: 'var(--text-muted)' }}>Karyawan:</span>
                 <span style={{ fontWeight: 600 }}>{selectedDetail.nama_lengkap} ({selectedDetail.nik})</span>
                 
@@ -716,7 +716,7 @@ const MedicalHistory = () => {
               
               {selectedDetail.foto_bukti && (
                 <div style={{ marginTop: '0.5rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'block' }}>Lampiran Bukti:</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9em', marginBottom: '0.5rem', display: 'block' }}>Lampiran Bukti:</span>
                   <img 
                     src={selectedDetail.foto_bukti} 
                     alt="Bukti Transaksi" 

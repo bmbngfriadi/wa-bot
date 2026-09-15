@@ -217,7 +217,7 @@ const UserAdmin = () => {
       <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
         {labels.map((lbl, idx) => (
           <span key={idx} style={{
-            fontSize: '0.7rem',
+            fontSize: '0.7em',
             fontWeight: 600,
             padding: '0.15rem 0.45rem',
             borderRadius: '4px',
@@ -334,7 +334,7 @@ const UserAdmin = () => {
               <button className="close-btn" onClick={() => setIsAddUserOpen(false)}><X size={20} /></button>
             </div>
 
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
+            {formError && <div style={{ color: '#f87171', fontSize: '0.85em', marginBottom: '1rem' }}>{formError}</div>}
 
             <form onSubmit={handleAddUserSubmit}>
               <div className="form-group">
@@ -400,7 +400,7 @@ const UserAdmin = () => {
 
               {/* Rincian Checklist Fitur */}
               <div style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.85em', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>
                   Checklist Rincian Fitur Yang Diizinkan:
                 </label>
                 <div className="form-grid-2" style={{ gap: '0.65rem' }}>
@@ -473,7 +473,7 @@ const UserAdmin = () => {
               <button className="close-btn" onClick={() => setIsEditUserOpen(false)}><X size={20} /></button>
             </div>
 
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
+            {formError && <div style={{ color: '#f87171', fontSize: '0.85em', marginBottom: '1rem' }}>{formError}</div>}
 
             <form onSubmit={handleEditUserSubmit}>
               <div className="form-group">
@@ -529,66 +529,66 @@ const UserAdmin = () => {
 
               {/* Rincian Checklist Fitur Specific Toggle */}
               <div style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
-                <label style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem', display: 'block' }}>
                   Checklist Rincian Akses Fitur Khusus:
                 </label>
                 <div className="form-grid-2" style={{ gap: '0.65rem' }}>
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.view} onChange={() => handlePermissionToggle('view')} />
-                    <span style={{ fontSize: '0.85rem' }}>Lihat & Cari Karyawan</span>
+                    <span style={{ fontSize: '0.85em' }}>Lihat & Cari Karyawan</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.add} onChange={() => handlePermissionToggle('add')} />
-                    <span style={{ fontSize: '0.85rem' }}>Tambah Karyawan Baru</span>
+                    <span style={{ fontSize: '0.85em' }}>Tambah Karyawan Baru</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.edit} onChange={() => handlePermissionToggle('edit')} />
-                    <span style={{ fontSize: '0.85rem' }}>Edit / Update Status</span>
+                    <span style={{ fontSize: '0.85em' }}>Edit / Update Status</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.delete} onChange={() => handlePermissionToggle('delete')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.delete ? '#ef4444' : 'inherit' }}>Hapus Karyawan</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.delete ? '#ef4444' : 'inherit' }}>Hapus Karyawan</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.export} onChange={() => handlePermissionToggle('export')} />
-                    <span style={{ fontSize: '0.85rem' }}>Export Data (Excel)</span>
+                    <span style={{ fontSize: '0.85em' }}>Export Data (Excel)</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.manage_users} onChange={() => handlePermissionToggle('manage_users')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.manage_users ? '#a855f7' : 'inherit' }}>Kelola System Users</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.manage_users ? '#a855f7' : 'inherit' }}>Kelola System Users</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.reset_password} onChange={() => handlePermissionToggle('reset_password')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.reset_password ? '#f59e0b' : 'inherit' }}>Reset Password Web</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.reset_password ? '#f59e0b' : 'inherit' }}>Reset Password Web</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.reset_pass_bot} onChange={() => handlePermissionToggle('reset_pass_bot')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.reset_pass_bot ? '#d97706' : 'inherit' }}>Reset Pass Bot</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.reset_pass_bot ? '#d97706' : 'inherit' }}>Reset Pass Bot</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.edit_medical_history} onChange={() => handlePermissionToggle('edit_medical_history')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.edit_medical_history ? '#8b5cf6' : 'inherit' }}>Edit Medical History</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.edit_medical_history ? '#8b5cf6' : 'inherit' }}>Edit Medical History</span>
                   </label>
 
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.delete_medical_history} onChange={() => handlePermissionToggle('delete_medical_history')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.delete_medical_history ? '#dc2626' : 'inherit' }}>Delete Medical History</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.delete_medical_history ? '#dc2626' : 'inherit' }}>Delete Medical History</span>
                   </label>
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.export_medical_history || false} onChange={() => handlePermissionToggle('export_medical_history')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.export_medical_history ? '#059669' : 'inherit' }}>Export Medical History</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.export_medical_history ? '#059669' : 'inherit' }}>Export Medical History</span>
                   </label>
                   <label className="checkbox-group">
                     <input type="checkbox" checked={formData.permissions.bulk_reset_budget || false} onChange={() => handlePermissionToggle('bulk_reset_budget')} />
-                    <span style={{ fontSize: '0.85rem', color: formData.permissions.bulk_reset_budget ? '#be123c' : 'inherit' }}>Bulk Reset Budget</span>
+                    <span style={{ fontSize: '0.85em', color: formData.permissions.bulk_reset_budget ? '#be123c' : 'inherit' }}>Bulk Reset Budget</span>
                   </label>
                 </div>
               </div>
@@ -614,11 +614,11 @@ const UserAdmin = () => {
               <button className="close-btn" onClick={() => setIsResetPassOpen(false)}><X size={20} /></button>
             </div>
 
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.85em', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
               Masukkan password baru untuk akun <b>@{selectedUser.username}</b> ({selectedUser.nama}):
             </p>
 
-            {formError && <div style={{ color: '#f87171', fontSize: '0.85rem', marginBottom: '1rem' }}>{formError}</div>}
+            {formError && <div style={{ color: '#f87171', fontSize: '0.85em', marginBottom: '1rem' }}>{formError}</div>}
 
             <form onSubmit={handleResetPassSubmit}>
               <div className="form-group">
