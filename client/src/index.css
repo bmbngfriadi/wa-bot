@@ -452,6 +452,30 @@ body {
   border-bottom: none;
 }
 
+/* Sticky Action Column on Desktop to prevent cut off */
+@media (min-width: 769px) {
+  .data-table th:last-child,
+  .data-table td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 10;
+    /* Adding a subtle shadow to indicate scrollability underneath */
+    box-shadow: -4px 0 12px -6px rgba(0,0,0,0.1);
+  }
+  
+  .data-table th:last-child {
+    background: var(--table-th-bg);
+  }
+
+  .data-table td:last-child {
+    background: var(--bg-card);
+  }
+
+  .data-table tbody tr:hover td:last-child {
+    background-color: var(--bg-card-hover);
+  }
+}
+
 /* Status Badges - Rounded Pill */
 .badge {
   display: inline-flex;
