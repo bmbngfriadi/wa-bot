@@ -963,6 +963,20 @@ body {
   position: relative;
 }
 
+.login-brand-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login-logo-box {
+  background: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  display: inline-block;
+  width: fit-content;
+}
+
 .login-left-content {
   margin-top: 4rem;
 }
@@ -1046,6 +1060,10 @@ body {
     background-size: 20px 20px;
   }
   
+  .login-brand-wrapper {
+    align-items: center;
+  }
+  
   .login-left-content {
     margin-top: 1.5rem;
     display: flex;
@@ -1074,6 +1092,6 @@ body {
     border-radius: 24px 24px 0 0;
     margin-top: -24px; /* overlapping effect */
     z-index: 2;
-    padding-top: 3rem;
+    padding-top: 1.5rem; /* Reduced space above Selamat Datang */
   }
 }

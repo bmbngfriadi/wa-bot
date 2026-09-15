@@ -41,8 +41,8 @@ const Login = () => {
     <div className="login-split-container">
       {/* Left Panel - Branding */}
       <div className="login-left-panel">
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ background: '#fff', padding: '0.75rem 1rem', borderRadius: '16px', display: 'inline-block', width: 'fit-content' }}>
+        <div className="login-brand-wrapper">
+          <div className="login-logo-box">
             <img
               src={LOGO_URL}
               alt="Cemindo Gemilang Logo"
