@@ -308,9 +308,9 @@ const MedicalHistory = () => {
         <div className="page-header-actions">
           {hasExportPermission && (
             <div className="history-filter-box">
-              <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>Filter:</span>
+              <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>Filter:</span>
               <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
-              <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>s/d</span>
+              <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>s/d</span>
               <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
               
               <button className="btn btn-secondary" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981', padding: '0.4rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -346,11 +346,11 @@ const MedicalHistory = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>Memuat data...</td>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>Memuat data...</td>
                 </tr>
               ) : filteredHistory.length === 0 ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>Tidak ada data riwayat transaksi.</td>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>Tidak ada data riwayat transaksi.</td>
                 </tr>
               ) : (
                 filteredHistory.map((h, index) => (
@@ -374,7 +374,7 @@ const MedicalHistory = () => {
                           <Eye size={14} /> Lihat Foto
                         </button>
                       ) : (
-                        <span style={{ color: 'var(--text-muted)' }}>-</span>
+                        <span style={{ color: 'var(--text-secondary)' }}>-</span>
                       )}
                     </td>
                     <td data-label="PIC (HR)" style={{ fontSize: '0.85em' }}>{h.pic_name || 'System'}</td>
@@ -425,7 +425,7 @@ const MedicalHistory = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--sidebar-bg)', padding: '0.75rem 1rem', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
                     <div>
                       <div style={{ fontWeight: 600 }}>{selectedKaryawan.nama_lengkap}</div>
-                      <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>{selectedKaryawan.nik} - Golongan: {selectedKaryawan.golongan}</div>
+                      <div style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>{selectedKaryawan.nik} - Golongan: {selectedKaryawan.golongan}</div>
                     </div>
                     <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setSelectedKaryawan(null); setSearchKaryawan(''); }}>
                       Ganti
@@ -448,7 +448,7 @@ const MedicalHistory = () => {
                     <div 
                       style={{ 
                         position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', 
-                        cursor: 'pointer', color: 'var(--text-muted)' 
+                        cursor: 'pointer', color: 'var(--text-secondary)' 
                       }}
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
@@ -474,11 +474,11 @@ const MedicalHistory = () => {
                               className="dropdown-item-hover"
                             >
                               <div style={{ fontWeight: 600 }}>{k.nama_lengkap}</div>
-                              <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>{k.nik} - Gol. {k.golongan}</div>
+                              <div style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>{k.nik} - Gol. {k.golongan}</div>
                             </div>
                           ))
                         ) : (
-                          <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)' }}>Karyawan tidak ditemukan</div>
+                          <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Karyawan tidak ditemukan</div>
                         )}
                       </div>
                     )}
@@ -552,7 +552,7 @@ const MedicalHistory = () => {
                       <button 
                         type="button" 
                         onClick={() => setDeductForm({...deductForm, foto_bukti: null})}
-                        style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'var(--danger-color)', color: '#fff', border: 'none', borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                        style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'var(--primary-500)', color: '#fff', border: 'none', borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
                       >
                         <X size={10} />
                       </button>
@@ -587,7 +587,7 @@ const MedicalHistory = () => {
             <form onSubmit={handleEditSubmit}>
               <div className="form-group" style={{ marginBottom: '1.5rem', position: 'relative' }}>
                 <label>Pilih Karyawan</label>
-                <div style={{ padding: '0.6rem 1rem', background: 'var(--input-bg)', border: '1px solid var(--border-color)', borderRadius: '6px', fontWeight: 600 }}>
+                <div style={{ padding: '0.6rem 1rem', background: 'var(--bg-color)', border: '1px solid var(--border-color)', borderRadius: '6px', fontWeight: 600 }}>
                   {selectedKaryawan?.nama_lengkap} ({selectedKaryawan?.nik})
                 </div>
               </div>
@@ -661,7 +661,7 @@ const MedicalHistory = () => {
                       <button 
                         type="button" 
                         onClick={() => setDeductForm({...deductForm, foto_bukti: null})}
-                        style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'var(--danger-color)', color: '#fff', border: 'none', borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                        style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'var(--primary-500)', color: '#fff', border: 'none', borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
                       >
                         <X size={10} />
                       </button>
@@ -695,28 +695,28 @@ const MedicalHistory = () => {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.9em' }}>
-                <span style={{ color: 'var(--text-muted)' }}>Karyawan:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Karyawan:</span>
                 <span style={{ fontWeight: 600 }}>{selectedDetail.nama_lengkap} ({selectedDetail.nik})</span>
                 
-                <span style={{ color: 'var(--text-muted)' }}>Kategori:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Kategori:</span>
                 <span style={{ fontWeight: 600 }}>{selectedDetail.kategori}</span>
                 
-                <span style={{ color: 'var(--text-muted)' }}>Nominal:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Nominal:</span>
                 <span style={{ color: '#ef4444', fontWeight: 700 }}>Rp {formatRp(selectedDetail.nominal)}</span>
                 
-                <span style={{ color: 'var(--text-muted)' }}>Tanggal:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Tanggal:</span>
                 <span>{new Date(selectedDetail.tanggal).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 
-                <span style={{ color: 'var(--text-muted)' }}>Deskripsi:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Deskripsi:</span>
                 <span>{selectedDetail.deskripsi || '-'}</span>
                 
-                <span style={{ color: 'var(--text-muted)' }}>PIC (HR):</span>
+                <span style={{ color: 'var(--text-secondary)' }}>PIC (HR):</span>
                 <span>{selectedDetail.pic_name || 'System'}</span>
               </div>
               
               {selectedDetail.foto_bukti && (
                 <div style={{ marginTop: '0.5rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9em', marginBottom: '0.5rem', display: 'block' }}>Lampiran Bukti:</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.9em', marginBottom: '0.5rem', display: 'block' }}>Lampiran Bukti:</span>
                   <img 
                     src={selectedDetail.foto_bukti} 
                     alt="Bukti Transaksi" 
@@ -754,10 +754,10 @@ const MedicalHistory = () => {
       {/* Add CSS for dropdown hover effect if not exist globally */}
       <style>{`
         .dropdown-item-hover:hover {
-          background: var(--input-bg);
+          background: var(--bg-color);
         }
         .table-row-hover:hover {
-          background-color: var(--input-bg) !important;
+          background-color: var(--bg-color) !important;
           transition: all 0.2s;
         }
       `}</style>

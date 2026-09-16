@@ -110,22 +110,22 @@ const SystemLogs = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                  <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Memuat data log aktivitas...
                   </td>
                 </tr>
               ) : logs.length === 0 ? (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                  <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Belum ada log aktivitas yang tercatat.
                   </td>
                 </tr>
               ) : (
                 logs.map((log, idx) => (
                   <tr key={log.id}>
-                    <td data-label="No" style={{ color: 'var(--text-muted)' }}>{idx + 1}</td>
+                    <td data-label="No" style={{ color: 'var(--text-secondary)' }}>{idx + 1}</td>
                     <td data-label="Waktu / Tanggal" style={{ whiteSpace: 'nowrap' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85em' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', fontSize: '0.85em' }}>
                         <Clock size={14} />
                         {formatDate(log.created_at)}
                       </div>
@@ -139,7 +139,7 @@ const SystemLogs = () => {
                           <div style={{ fontSize: '0.75em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>@{log.actor_username}</div>
                         </div>
                       ) : (
-                        <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>System / User Dihapus</span>
+                        <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>System / User Dihapus</span>
                       )}
                     </td>
                   </tr>

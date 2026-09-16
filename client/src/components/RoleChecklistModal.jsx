@@ -66,7 +66,7 @@ const RoleChecklistModal = ({ isOpen, onClose, currentRole }) => {
           <button className="close-btn" onClick={onClose}><X size={20} /></button>
         </div>
 
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
           Daftar fitur dan batasan akses untuk masing-masing role di Sistem Portal HRGA PT Cemindo Gemilang Tbk:
         </p>
 

@@ -157,7 +157,7 @@ const MedicalPlafond = () => {
       <div className="glass-card" style={{ marginBottom: '1.5rem', padding: '1.25rem' }}>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           <div style={{ flex: '1 1 240px', position: 'relative' }}>
-            <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+            <Search size={18} color="var(--text-secondary)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
               className="form-control"
@@ -191,11 +191,11 @@ const MedicalPlafond = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="8" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>Memuat data...</td>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>Memuat data...</td>
                 </tr>
               ) : data.length === 0 ? (
                 <tr>
-                  <td colSpan="8" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>Tidak ada data ditemukan.</td>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>Tidak ada data ditemukan.</td>
                 </tr>
               ) : (
                 data.map((emp, index) => {
@@ -210,14 +210,14 @@ const MedicalPlafond = () => {
                       <td data-label="Karyawan">
                         <div style={{ fontWeight: 600 }}>{emp.nama_lengkap}</div>
                         <div style={{ fontSize: '0.8em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{emp.nik}</div>
-                        <div style={{ fontSize: '0.75em', color: 'var(--text-muted)' }}>{emp.department}</div>
+                        <div style={{ fontSize: '0.75em', color: 'var(--text-secondary)' }}>{emp.department}</div>
                       </td>
                       <td data-label="Golongan"><span style={{ fontWeight: 'bold' }}>{emp.golongan}</span></td>
                       <td data-label="Rawat Inap" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_inap_total)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Inap Total'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaInap)}</div>
-                        <div style={{ fontSize: '0.75em', color: 'var(--text-muted)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
+                        <div style={{ fontSize: '0.75em', color: 'var(--text-secondary)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
                       </td>
                       <td data-label="Rawat Jalan" style={{ fontSize: '0.85em' }}>
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_jalan)}</div>
@@ -271,9 +271,9 @@ const MedicalPlafond = () => {
             </div>
 
             {historyLoading ? (
-              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Memuat riwayat...</div>
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Memuat riwayat...</div>
             ) : history.length === 0 ? (
-              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Belum ada riwayat pemotongan di tahun ini.</div>
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Belum ada riwayat pemotongan di tahun ini.</div>
             ) : (
               <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
                 <table className="data-table">
@@ -318,7 +318,7 @@ const MedicalPlafond = () => {
               <button className="close-btn" onClick={() => setIsResetPassModalOpen(false)}><X size={20} /></button>
             </div>
 
-            <div style={{ background: 'var(--input-bg)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', fontSize: '0.9em' }}>
+            <div style={{ background: 'var(--bg-color)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', fontSize: '0.9em' }}>
               <div><b>Nama:</b> {selectedEmp.nama_lengkap} ({selectedEmp.nik})</div>
             </div>
 

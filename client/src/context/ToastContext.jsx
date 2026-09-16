@@ -82,7 +82,7 @@ export const ToastProvider = ({ children }) => {
               {toast.type === 'error' && <XCircle size={18} color="#ef4444" />}
               {toast.type === 'warning' && <AlertTriangle size={18} color="#f59e0b" />}
               {toast.type === 'info' && <Info size={18} color="var(--primary-500)" />}
-              <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-main)' }}>{toast.message}</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>{toast.message}</span>
             </div>
             <button className="close-btn" onClick={() => removeToast(toast.id)} style={{ padding: '2px' }}>
               <X size={14} />
@@ -123,11 +123,11 @@ export const ToastProvider = ({ children }) => {
               )}
             </div>
 
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
               {confirmModal.title}
             </h3>
 
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1.75rem', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: 1.5 }}>
               {confirmModal.message}
             </p>
 

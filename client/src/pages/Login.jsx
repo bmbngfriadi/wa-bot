@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Lock, User, ArrowRight, Sun, Moon, Eye, EyeOff } from 'lucide-react';
+import { Lock, User, ArrowRight, Sun, Moon, Eye, EyeOff, Loader2 } from 'lucide-react';
 import api from '../services/api';
 
 const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
@@ -39,71 +39,77 @@ const Login = () => {
 
   return (
     <div className="login-split-container">
-      {/* Left Panel - Branding */}
+      {/* Left side (Top on mobile) */}
       <div className="login-left-panel">
-        <div className="login-brand-wrapper">
-          <div className="login-logo-box">
-            <img
-              src={LOGO_URL}
-              alt="Cemindo Gemilang Logo"
-              style={{ height: '55px', objectFit: 'contain' }}
-            />
-          </div>
-          
-          <div className="login-left-content">
-            <h1>HRGA Web<br />Portal System</h1>
-            <hr />
-            <p>
-              Sistem manajemen operasional dan administrasi karyawan terpadu untuk efisiensi dan transparansi lingkungan kerja.
+        {/* Floating Glowing Orbs for "Alive" aesthetic */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse mix-blend-overlay"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-pulse mix-blend-overlay" style={{ animationDelay: '1s' }}></div>
+
+        <div className="text-center lg:text-left mx-auto lg:mx-0 lg:ml-12 xl:ml-20 flex flex-col h-full justify-center lg:justify-start lg:py-12 relative z-10 px-6 lg:px-0 mt-12 lg:mt-0">
+          <div>
+            <div className="bg-white p-3 rounded-xl inline-block mb-4 lg:mb-10 shadow-lg border border-white/20">
+              <img src={LOGO_URL} alt="Semen Merah Putih Logo" className="h-9 lg:h-10 object-contain" />
+            </div>
+            <h1 className="text-2xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight mb-2 lg:mb-6 leading-tight text-white drop-shadow-sm">
+              <span className="lg:hidden">HRGA Web Portal</span>
+              <span className="hidden lg:inline">HRGA Web<br />Portal System</span>
+            </h1>
+            <div className="hidden lg:block w-12 h-1.5 bg-white mb-6 rounded-full opacity-90 shadow-sm" />
+            <p className="text-white/90 text-sm lg:text-lg max-w-md leading-relaxed font-medium mx-auto lg:mx-0 drop-shadow-sm">
+              <span className="lg:hidden">Sistem manajemen operasional terpadu.</span>
+              <span className="hidden lg:inline">Sistem manajemen operasional dan administrasi karyawan terpadu untuk efisiensi dan transparansi lingkungan kerja.</span>
             </p>
           </div>
-        </div>
-        
-        <div className="login-footer-text">
-          PT CEMINDO GEMILANG TBK - PLANT BATAM
+          <div className="hidden lg:block mt-auto pt-16 text-white/70 text-sm font-semibold tracking-wide">
+            PT CEMINDO GEMILANG TBK - PLANT BATAM
+          </div>
         </div>
       </div>
 
-      {/* Right Panel - Login Form */}
+      {/* Right side (Bottom overlapping card on mobile) */}
       <div className="login-right-panel">
-        {/* Theme Toggle Button */}
-        <button
-          onClick={() => toggleTheme()}
-          className="btn btn-secondary btn-icon"
-          style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', borderRadius: '50%' }}
-          title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
-        >
-          {theme === 'dark' ? <Sun size={18} color="#f59e0b" /> : <Moon size={18} color="#b51d22" />}
-        </button>
+        
+        {/* Dark Mode Toggle directly inside right panel */}
+        <div className="absolute top-6 right-6 lg:fixed lg:top-8 lg:right-8 z-50">
+          <button
+            onClick={toggleTheme}
+            className="w-12 h-12 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-[var(--surface)] border border-gray-200 dark:border-gray-700/50 shadow-sm text-[var(--primary-600)] dark:text-[var(--primary-400)] hover:scale-105 transition-transform"
+            title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
+          >
+            {theme === 'dark' ? <Sun size={20} strokeWidth={1.5} /> : <Moon size={20} strokeWidth={1.5} />}
+          </button>
+        </div>
 
-        <div className="login-right-content">
-          <div style={{ marginBottom: '2.5rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '0.5rem' }}>Selamat Datang</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+        <div className="login-right-content text-center lg:text-left">
+          <div className="mb-10 -mt-2 lg:mt-0">
+            <h2 className="text-3xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">Selamat Datang</h2>
+            <p className="text-[var(--text-secondary)] font-medium">
               Silakan login untuk mengakses dashboard operasional.
             </p>
           </div>
 
           {isForgotPassword ? (
-            <>
+            <div className="animate-fade-in-up">
               {resetMessage && (
-                <div style={{ background: '#c6f6d5', color: '#22543d', padding: '0.85rem 1rem', borderRadius: '6px', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+                <div className="bg-green-100 border border-green-200 text-green-800 px-4 py-3 rounded-xl text-sm mb-6 font-medium">
                   {resetMessage}
                 </div>
               )}
               {resetError && (
-                <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '6px', padding: '0.85rem 1rem', color: '#dc2626', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm mb-6 font-medium">
                   {resetError}
                 </div>
               )}
-              <form onSubmit={handleForgotPasswordSubmit}>
-                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                  <label>Email Akun Anda</label>
-                  <div style={{ position: 'relative' }}>
-                    <div className="login-icon-wrapper"><User size={18} /></div>
+              <form onSubmit={handleForgotPasswordSubmit} className="space-y-5 text-left">
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-1.5 ml-1">Email Akun Anda</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
+                      <User size={18} />
+                    </div>
                     <input
                       type="email"
-                      className="form-control"
+                      className="form-control pl-11"
                       placeholder="Enter your email"
                       value={resetEmail}
                       onChange={(e) => setResetEmail(e.target.value)}
@@ -111,39 +117,41 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '0.9rem', fontSize: '1rem', fontWeight: 600 }} disabled={isResetLoading}>
+                <button 
+                  type="submit" 
+                  className="w-full flex justify-center items-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-[var(--primary-500)] hover:bg-[var(--primary-600)] focus:outline-none focus:ring-4 focus:ring-[var(--primary-500)]/30 transition-all shadow-[0_4px_14px_0_rgba(225,29,72,0.39)] hover:shadow-[0_6px_20px_rgba(225,29,72,0.23)] hover:-translate-y-0.5"
+                  disabled={isResetLoading}
+                >
                   {isResetLoading ? 'Mengirim...' : 'Kirim Link Reset'}
                 </button>
               </form>
-              <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-                <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--primary-500)', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600 }} onClick={() => setIsForgotPassword(false)}>
+              <div className="text-center mt-6">
+                <button 
+                  type="button" 
+                  className="text-sm font-bold text-[var(--primary-500)] hover:text-[var(--primary-600)] transition-colors"
+                  onClick={() => setIsForgotPassword(false)}
+                >
                   Kembali ke Login
                 </button>
               </div>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="animate-fade-in-up">
               {error && (
-                <div style={{
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.3)',
-                  borderRadius: '6px',
-                  padding: '0.85rem 1rem',
-                  color: '#dc2626',
-                  fontSize: '0.85rem',
-                  marginBottom: '1.5rem'
-                }}>
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm mb-6 font-medium">
                   {error}
                 </div>
               )}
-              <form onSubmit={handleSubmit}>
-                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                  <label>Username / Email</label>
-                  <div style={{ position: 'relative' }}>
-                    <div className="login-icon-wrapper"><User size={18} /></div>
+              <form onSubmit={handleSubmit} className="space-y-5 text-left">
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-1.5 ml-1">Username / Email</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
+                      <User size={18} />
+                    </div>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control pl-11"
                       placeholder="Enter your username or email"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
@@ -152,64 +160,64 @@ const Login = () => {
                   </div>
                 </div>
 
-                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                  <label>Password</label>
-                  <div style={{ position: 'relative' }}>
-                    <div className="login-icon-wrapper"><Lock size={18} /></div>
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-1.5 ml-1">Password</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
+                      <Lock size={18} />
+                    </div>
                     <input
                       type={showPassword ? 'text' : 'password'}
-                      className="form-control"
+                      className="form-control pl-11 pr-11"
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      style={{ paddingRight: '2.75rem' }}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      style={{
-                        position: 'absolute',
-                        right: '1rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--text-muted)',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        padding: 0
-                      }}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: 500, margin: 0, color: 'var(--text-muted)' }}>
-                    <input type="checkbox" style={{ width: '16px', height: '16px', accentColor: 'var(--primary-500)' }} />
+                <div className="flex justify-between items-center pt-2">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-[var(--text-secondary)]">
+                    <input 
+                      type="checkbox" 
+                      className="w-4 h-4 rounded border-gray-300 text-[var(--primary-500)] focus:ring-[var(--primary-500)] accent-[var(--primary-500)]" 
+                    />
                     Remember me
                   </label>
-                  <button type="button" className="btn-link" style={{ background: 'none', border: 'none', color: 'var(--primary-500)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, padding: 0 }} onClick={() => setIsForgotPassword(true)}>
+                  <button 
+                    type="button" 
+                    className="text-sm font-bold text-[var(--primary-500)] hover:text-[var(--primary-600)] transition-colors"
+                    onClick={() => setIsForgotPassword(true)}
+                  >
                     Lupa Password?
                   </button>
                 </div>
 
                 <button
                   type="submit"
-                  className="btn btn-primary"
-                  style={{ width: '100%', padding: '0.9rem', fontSize: '1rem', fontWeight: 600, justifyContent: 'center' }}
+                  className="w-full flex justify-center items-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-[var(--primary-500)] hover:bg-[var(--primary-600)] focus:outline-none focus:ring-4 focus:ring-[var(--primary-500)]/30 transition-all shadow-[0_4px_14px_0_rgba(225,29,72,0.39)] hover:shadow-[0_6px_20px_rgba(225,29,72,0.23)] hover:-translate-y-0.5 mt-4"
                   disabled={loading}
                 >
-                  {loading ? 'Processing...' : <>Sign In <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} /></>}
+                  {loading ? (
+                    <><Loader2 size={18} className="animate-spin mr-2" /> Processing...</>
+                  ) : (
+                    <>Sign In <ArrowRight size={18} className="ml-2" /></>
+                  )}
                 </button>
               </form>
-            </>
+            </div>
           )}
 
-          <div style={{ marginTop: '3rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-dim)', fontWeight: 500 }}>
-            © 2026 SEMEN MERAH PUTIH
+          <div className="mt-12 text-center lg:text-left text-xs font-semibold text-gray-400 dark:text-gray-600 uppercase tracking-wider">
+            &copy; {new Date().getFullYear()} Semen Merah Putih
           </div>
         </div>
       </div>

@@ -402,7 +402,7 @@ const Dashboard = () => {
       title: 'Konfirmasi Hapus Data',
       message: `Apakah Anda yakin ingin menghapus data Karyawan "${emp.nama_lengkap}" secara permanen? Data yang dihapus tidak dapat dikembalikan.`,
       confirmText: 'Ya, Hapus Permanen',
-      confirmColor: 'var(--danger-color)',
+      confirmColor: 'var(--primary-500)',
     });
     
     if (isConfirmed) {
@@ -498,7 +498,7 @@ const Dashboard = () => {
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Search Box */}
           <div style={{ flex: '1 1 240px', position: 'relative' }}>
-            <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+            <Search size={18} color="var(--text-secondary)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
               className="form-control"
@@ -555,7 +555,7 @@ const Dashboard = () => {
           justify: 'space-between',
           alignItems: 'center',
           fontSize: '0.875em',
-          color: 'var(--text-main)',
+          color: 'var(--text-primary)',
           flexWrap: 'wrap',
           gap: '0.75rem'
         }}>
@@ -625,13 +625,13 @@ const Dashboard = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Memuat data karyawan...
                   </td>
                 </tr>
               ) : employees.length === 0 ? (
                 <tr>
-                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Tidak ada data karyawan ditemukan.
                   </td>
                 </tr>
@@ -668,7 +668,7 @@ const Dashboard = () => {
                       </td>
                       <td data-label="Department">{emp.department}</td>
                       <td data-label="Golongan"><span style={{fontWeight: 'bold', color: 'var(--primary-500)'}}>{emp.golongan || '4 (A-B)'}</span></td>
-                      <td data-label="Keluarga" style={{ fontSize: '0.8em', color: 'var(--text-muted)', lineHeight: '1.4' }}>
+                      <td data-label="Keluarga" style={{ fontSize: '0.8em', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '2px' }}>Istri : {emp.nama_istri || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 1 : {emp.nama_anak_pertama || '-'}</div>
                         <div style={{ marginBottom: '2px' }}>Anak 2 : {emp.nama_anak_kedua || '-'}</div>
@@ -734,7 +734,7 @@ const Dashboard = () => {
 
         {/* Pagination Footer */}
         <div style={{ padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '1rem' }}>
-          <span style={{ fontSize: '0.85em', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.85em', color: 'var(--text-secondary)' }}>
             Menampilkan <b>{employees.length}</b> dari <b>{pagination.totalRows}</b> total karyawan (Halaman {pagination.page} dari {pagination.totalPages})
           </span>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -769,10 +769,10 @@ const Dashboard = () => {
             </div>
 
             {/* Template Download Prompt */}
-            <div style={{ background: 'var(--input-bg)', border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div style={{ background: 'var(--bg-color)', border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
-                <div style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-main)' }}>Belum punya format file?</div>
-                <div style={{ fontSize: '0.775em', color: 'var(--text-muted)' }}>Unduh template Excel resmi (termasuk kolom Jenis Kelamin & Join Date).</div>
+                <div style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-primary)' }}>Belum punya format file?</div>
+                <div style={{ fontSize: '0.775em', color: 'var(--text-secondary)' }}>Unduh template Excel resmi (termasuk kolom Jenis Kelamin & Join Date).</div>
               </div>
               <button className="btn btn-secondary btn-sm" onClick={handleDownloadTemplate} style={{ color: 'var(--primary-500)' }}>
                 <Download size={15} /> Unduh Template
@@ -815,7 +815,7 @@ const Dashboard = () => {
               {/* Data Preview Table */}
               {importData.length > 0 && (
                 <div style={{ marginBottom: '1.25rem' }}>
-                  <div style={{ fontSize: '0.825em', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+                  <div style={{ fontSize: '0.825em', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
                     Pratinjau Data Impor ({importData.length} baris terdeteksi):
                   </div>
                   <div style={{ maxHeight: '160px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '4px' }}>
@@ -843,7 +843,7 @@ const Dashboard = () => {
                     </table>
                   </div>
                   {importData.length > 5 && (
-                    <div style={{ fontSize: '0.75em', color: 'var(--text-dim)', marginTop: '0.3rem', textAlign: 'right' }}>
+                    <div style={{ fontSize: '0.75em', color: 'var(--text-secondary)', marginTop: '0.3rem', textAlign: 'right' }}>
                       ... dan {importData.length - 5} baris data lainnya.
                     </div>
                   )}

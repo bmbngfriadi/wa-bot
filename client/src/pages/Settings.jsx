@@ -69,18 +69,18 @@ const Settings = () => {
   return (
     <div>
       <div style={{ marginBottom: '1.25rem' }}>
-        <h1 style={{ fontSize: '1.6em', fontWeight: 800, color: 'var(--text-main)' }}>Pengaturan Sistem (Settings)</h1>
-        <p style={{ fontSize: '0.875em', color: 'var(--text-muted)' }}>
+        <h1 style={{ fontSize: '1.6em', fontWeight: 800, color: 'var(--text-primary)' }}>Pengaturan Sistem (Settings)</h1>
+        <p style={{ fontSize: '0.875em', color: 'var(--text-secondary)' }}>
           Atur preferensi tema antarmuka dan ubah password akun Anda.
         </p>
       </div>
 
       {/* Theme Selection Card */}
       <div className="glass-card" style={{ marginBottom: '2rem' }}>
-        <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+        <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
           Tampilan Tema (Theme Mode)
         </h3>
-        <p style={{ fontSize: '0.85em', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+        <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
           Pilih tema antarmuka sesuai kenyamanan mata Anda. Seluruh elemen (font, kartu, tabel, dan warna) akan menyesuaikan secara otomatis.
         </p>
 
@@ -141,11 +141,11 @@ const Settings = () => {
       <div className="glass-card" style={{ marginBottom: user?.role === 'administrator' ? '2rem' : '0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <KeyRound size={22} color="var(--primary-500)" />
-          <h3 style={{ fontSize: '1.1em', fontWeight: 700, color: 'var(--text-main)' }}>
+          <h3 style={{ fontSize: '1.1em', fontWeight: 700, color: 'var(--text-primary)' }}>
             Ubah Password Akun Saya (@{user?.username})
           </h3>
         </div>
-        <p style={{ fontSize: '0.85em', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+        <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
           Fitur ubah password dapat digunakan oleh semua role ({user?.nama}) untuk menjaga keamanan akun Anda.
         </p>
 
@@ -228,32 +228,32 @@ const Settings = () => {
       {/* System Status Information (ONLY Administrator Role) */}
       {user?.role === 'administrator' && (
         <div className="glass-card">
-          <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>
+          <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-primary)' }}>
             Informasi & Integrasi Sistem (Administrator Only)
           </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--input-bg)', borderRadius: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--bg-color)', borderRadius: '4px' }}>
               <Database size={20} color="var(--primary-500)" />
               <div>
-                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-main)' }}>Database Server (MySQL)</div>
-                <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>`cemindo_hr` • Terhubung langsung dengan WhatsApp Bot</div>
+                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-primary)' }}>Database Server (MySQL)</div>
+                <div style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>`cemindo_hr` • Terhubung langsung dengan WhatsApp Bot</div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--input-bg)', borderRadius: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--bg-color)', borderRadius: '4px' }}>
               <ShieldCheck size={20} color="#10b981" />
               <div>
-                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-main)' }}>Autentikasi & Keamanan (RBAC)</div>
-                <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>Token JWT Terenkripsi (Berlaku 24 jam) • Proteksi Izin Akses Granular</div>
+                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-primary)' }}>Autentikasi & Keamanan (RBAC)</div>
+                <div style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>Token JWT Terenkripsi (Berlaku 24 jam) • Proteksi Izin Akses Granular</div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--input-bg)', borderRadius: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.85rem 1rem', background: 'var(--bg-color)', borderRadius: '4px' }}>
               <Monitor size={20} color="#3b82f6" />
               <div>
-                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-main)' }}>Express REST API Server</div>
-                <div style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>http://localhost:5000/api</div>
+                <div style={{ fontSize: '0.9em', fontWeight: 600, color: 'var(--text-primary)' }}>Express REST API Server</div>
+                <div style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>http://localhost:5000/api</div>
               </div>
             </div>
           </div>

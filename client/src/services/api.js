@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE_URL = isLocal ? `http://${window.location.hostname}:5000/api` : `/wa-bot/api`;
+const API_BASE_URL = isLocal ? `http://${window.location.hostname}:5005/api` : `/wa-bot/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,

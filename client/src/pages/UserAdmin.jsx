@@ -221,7 +221,7 @@ const UserAdmin = () => {
             fontWeight: 600,
             padding: '0.15rem 0.45rem',
             borderRadius: '4px',
-            background: 'var(--input-bg)',
+            background: 'var(--bg-color)',
             border: `1px solid ${lbl.color}40`,
             color: lbl.color
           }}>
@@ -265,7 +265,7 @@ const UserAdmin = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Memuat data user...
                   </td>
                 </tr>
@@ -400,7 +400,7 @@ const UserAdmin = () => {
 
               {/* Rincian Checklist Fitur */}
               <div style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
-                <label style={{ fontSize: '0.85em', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.85em', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'block' }}>
                   Checklist Rincian Fitur Yang Diizinkan:
                 </label>
                 <div className="form-grid-2" style={{ gap: '0.65rem' }}>
@@ -529,7 +529,7 @@ const UserAdmin = () => {
 
               {/* Rincian Checklist Fitur Specific Toggle */}
               <div style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
-                <label style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875em', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'block' }}>
                   Checklist Rincian Akses Fitur Khusus:
                 </label>
                 <div className="form-grid-2" style={{ gap: '0.65rem' }}>
@@ -614,7 +614,7 @@ const UserAdmin = () => {
               <button className="close-btn" onClick={() => setIsResetPassOpen(false)}><X size={20} /></button>
             </div>
 
-            <p style={{ fontSize: '0.85em', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
               Masukkan password baru untuk akun <b>@{selectedUser.username}</b> ({selectedUser.nama}):
             </p>
 

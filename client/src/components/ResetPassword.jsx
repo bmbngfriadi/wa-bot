@@ -61,8 +61,8 @@ const ResetPassword = ({ token }) => {
                             style={{ height: '65px', objectFit: 'contain', maxWidth: '100%' }}
                         />
                     </div>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>Buat Password Baru</h2>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>Buat Password Baru</h2>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.3rem' }}>
                         Silakan masukkan password baru untuk akun Anda.
                     </p>
                 </div>

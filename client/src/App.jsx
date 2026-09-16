@@ -11,7 +11,6 @@ import MedicalHistory from './pages/MedicalHistory';
 import Sidebar from './components/Sidebar';
 import RoleChecklistModal from './components/RoleChecklistModal';
 import ResetPassword from './components/ResetPassword';
-import { Menu, AlertTriangle, X } from 'lucide-react';
 
 const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
 
@@ -56,23 +55,16 @@ const MainLayout = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className="flex flex-col min-h-screen bg-[var(--bg-color)] transition-colors duration-300">
       {/* Mobile Sticky Top Header */}
-      <div className="mobile-top-bar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <img src={LOGO_URL} alt="Logo" style={{ height: '32px', objectFit: 'contain' }} />
-          <span style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--sidebar-text)' }}>Cemindo HRGA</span>
+      <div className="flex lg:hidden items-center justify-between p-4 bg-[var(--bg-card)] border-b border-[var(--border-color)] sticky top-0 z-40 shadow-sm transition-colors duration-300">
+        <div className="flex items-center gap-3">
+          <img src={LOGO_URL} alt="Logo" className="h-8 object-contain" />
+          <span className="font-extrabold text-[var(--text-primary)] text-sm tracking-tight">Cemindo HRGA</span>
         </div>
-        <button
-          className="btn btn-secondary btn-icon"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          title="Buka Menu Sidebar"
-        >
-          <Menu size={20} />
-        </button>
       </div>
 
-      <div className="app-container">
+      <div className="flex w-full min-h-screen p-0 lg:p-6 gap-6 relative">
         <Sidebar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -81,7 +73,7 @@ const MainLayout = () => {
           onCloseMobile={() => setIsMobileMenuOpen(false)}
         />
 
-        <main className="main-content">
+        <main className="flex-1 bg-[var(--bg-card)] lg:rounded-[24px] lg:border lg:border-[var(--border-color)] shadow-sm p-4 lg:p-8 min-h-full overflow-x-hidden pb-24 lg:pb-8 transition-colors duration-300 w-full max-w-full">
           {activeTab === 'karyawan' && <Dashboard />}
           {activeTab === 'medical' && <MedicalPlafond />}
           {activeTab === 'medical_history' && <MedicalHistory />}
