@@ -104,7 +104,7 @@
   }
 
   .stats-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8;
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8;
   }
   .stat-card {
     @apply bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-sm flex items-center gap-5 p-5 hover:-translate-y-1 transition-transform duration-300;
@@ -155,12 +155,13 @@
       border: none;
       border-bottom: 1px solid var(--border-color);
       position: relative;
-      padding-left: 45%;
+      padding: 12px 16px 12px 45%;
       text-align: right;
       min-height: 48px;
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
       white-space: normal;
     }
     .data-table td::before {

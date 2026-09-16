@@ -90,7 +90,7 @@ const Settings = () => {
             onClick={() => handleSelectTheme('dark')}
             style={{
               padding: '1.5rem',
-              borderRadius: '4px',
+              borderRadius: '16px',
               border: `2px solid ${theme === 'dark' ? 'var(--primary-500)' : 'var(--border-color)'}`,
               background: '#0d0e12',
               color: '#fff',
@@ -115,7 +115,7 @@ const Settings = () => {
             onClick={() => handleSelectTheme('light')}
             style={{
               padding: '1.5rem',
-              borderRadius: '4px',
+              borderRadius: '16px',
               border: `2px solid ${theme === 'light' ? 'var(--primary-500)' : 'var(--border-color)'}`,
               background: '#ffffff',
               color: '#0f172a',
