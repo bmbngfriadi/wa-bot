@@ -307,14 +307,15 @@ const MedicalHistory = () => {
         
         <div className="page-header-actions">
           {hasExportPermission && (
-            <div className="history-filter-box">
-              <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>Filter:</span>
-              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
-              <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>s/d</span>
-              <input type="date" className="form-control" style={{ width: 'auto', padding: '0.4rem', fontSize: '0.8em' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
-              
-              <button className="btn btn-secondary" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981', padding: '0.4rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Download size={14} /> Export Excel
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem', width: '100%', justifyContent: 'flex-start' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '1 1 auto' }}>
+                <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>Filter:</span>
+                <input type="date" className="form-control" style={{ flex: '1 1 auto', padding: '0.6rem', fontSize: '0.85em', minWidth: '130px' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
+                <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>s/d</span>
+                <input type="date" className="form-control" style={{ flex: '1 1 auto', padding: '0.6rem', fontSize: '0.85em', minWidth: '130px' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
+              </div>
+              <button className="btn btn-secondary" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981', flex: '1 1 100%', justifyContent: 'center' }}>
+                <Download size={16} /> Export Excel
               </button>
             </div>
           )}

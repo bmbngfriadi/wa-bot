@@ -497,7 +497,7 @@ const Dashboard = () => {
       <div className="glass-card" style={{ marginBottom: '1.5rem', padding: '1.25rem' }}>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Search Box */}
-          <div style={{ flex: '1 1 240px', position: 'relative' }}>
+          <div style={{ flex: '1 1 100%', position: 'relative' }}>
             <Search size={18} color="var(--text-secondary)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
@@ -509,37 +509,39 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Department Filter */}
-          <div style={{ minWidth: '180px' }}>
-            <select
-              className="form-control"
-              value={selectedDept}
-              onChange={(e) => { setSelectedDept(e.target.value); setPage(1); }}
-            >
-              <option value="">Semua Department</option>
-              {departments.map((dept, idx) => (
-                <option key={idx} value={dept}>{dept}</option>
-              ))}
-            </select>
-          </div>
+          <div style={{ display: 'flex', gap: '1rem', flex: '1 1 100%', flexWrap: 'wrap', alignItems: 'center' }}>
+            {/* Department Filter */}
+            <div style={{ flex: '1 1 150px' }}>
+              <select
+                className="form-control"
+                value={selectedDept}
+                onChange={(e) => { setSelectedDept(e.target.value); setPage(1); }}
+              >
+                <option value="">Semua Department</option>
+                {departments.map((dept, idx) => (
+                  <option key={idx} value={dept}>{dept}</option>
+                ))}
+              </select>
+            </div>
 
-          {/* Status Filter */}
-          <div style={{ minWidth: '150px' }}>
-            <select
-              className="form-control"
-              value={selectedStatus}
-              onChange={(e) => { setSelectedStatus(e.target.value); setPage(1); }}
-            >
-              <option value="">Semua Status</option>
-              <option value="Aktif">Aktif</option>
-              <option value="Non-Aktif">Non-Aktif</option>
-              <option value="Resigned">Resigned</option>
-            </select>
-          </div>
+            {/* Status Filter */}
+            <div style={{ flex: '1 1 120px' }}>
+              <select
+                className="form-control"
+                value={selectedStatus}
+                onChange={(e) => { setSelectedStatus(e.target.value); setPage(1); }}
+              >
+                <option value="">Semua Status</option>
+                <option value="Aktif">Aktif</option>
+                <option value="Non-Aktif">Non-Aktif</option>
+                <option value="Resigned">Resigned</option>
+              </select>
+            </div>
 
-          <button className="btn btn-secondary btn-icon" onClick={fetchEmployees} title="Refresh Data">
-            <RefreshCw size={16} />
-          </button>
+            <button className="btn btn-secondary btn-icon" style={{ flexShrink: 0 }} onClick={fetchEmployees} title="Refresh Data">
+              <RefreshCw size={16} />
+            </button>
+          </div>
         </div>
       </div>
 

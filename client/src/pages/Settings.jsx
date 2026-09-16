@@ -76,7 +76,7 @@ const Settings = () => {
       </div>
 
       {/* Theme Selection Card */}
-      <div className="glass-card" style={{ marginBottom: '2rem' }}>
+      <div className="glass-card" style={{ marginBottom: '2rem', padding: '1.5rem' }}>
         <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
           Tampilan Tema (Theme Mode)
         </h3>
@@ -138,7 +138,7 @@ const Settings = () => {
       </div>
 
       {/* Self Change Password Card (All Roles) */}
-      <div className="glass-card" style={{ marginBottom: user?.role === 'administrator' ? '2rem' : '0' }}>
+      <div className="glass-card" style={{ marginBottom: user?.role === 'administrator' ? '2rem' : '0', padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <KeyRound size={22} color="var(--primary-500)" />
           <h3 style={{ fontSize: '1.1em', fontWeight: 700, color: 'var(--text-primary)' }}>
@@ -218,6 +218,7 @@ const Settings = () => {
           <button
             type="submit"
             className="btn btn-primary"
+            style={{ width: '100%', justifyContent: 'center' }}
             disabled={passLoading}
           >
             {passLoading ? 'Memperbarui...' : 'Simpan Password Baru'}
@@ -227,7 +228,7 @@ const Settings = () => {
 
       {/* System Status Information (ONLY Administrator Role) */}
       {user?.role === 'administrator' && (
-        <div className="glass-card">
+        <div className="glass-card" style={{ padding: '1.5rem' }}>
           <h3 style={{ fontSize: '1.1em', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-primary)' }}>
             Informasi & Integrasi Sistem (Administrator Only)
           </h3>
