@@ -11,11 +11,12 @@ import MedicalHistory from './pages/MedicalHistory';
 import Sidebar from './components/Sidebar';
 import RoleChecklistModal from './components/RoleChecklistModal';
 import ResetPassword from './components/ResetPassword';
+import { Sun, Moon } from 'lucide-react';
 
 const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
 
 const MainLayout = () => {
-  const { user, sessionExpiredMessage, setSessionExpiredMessage } = useContext(AuthContext);
+  const { user, sessionExpiredMessage, setSessionExpiredMessage, theme, toggleTheme } = useContext(AuthContext);
   const { showAlert } = useContext(ToastContext);
   const [activeTab, setActiveTab] = useState('karyawan');
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
@@ -60,8 +61,16 @@ const MainLayout = () => {
       <div className="flex lg:hidden items-center justify-between p-4 bg-[var(--bg-card)] border-b border-[var(--border-color)] sticky top-0 z-40 shadow-sm transition-colors duration-300">
         <div className="flex items-center gap-3">
           <img src={LOGO_URL} alt="Logo" className="h-8 object-contain" />
-          <span className="font-extrabold text-[var(--text-primary)] text-sm tracking-tight">Cemindo HRGA</span>
+          <span className="font-extrabold text-[var(--text-primary)] text-sm tracking-tight">HRGA Web Portal System</span>
         </div>
+        
+        <button
+          onClick={toggleTheme}
+          className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-color)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all flex-shrink-0 ml-2"
+          title="Toggle Theme"
+        >
+          {theme === 'dark' ? <Sun size={18} strokeWidth={1.5} /> : <Moon size={18} strokeWidth={1.5} />}
+        </button>
       </div>
 
       <div className="flex w-full min-h-screen p-0 lg:p-6 gap-6 relative">
@@ -73,7 +82,7 @@ const MainLayout = () => {
           onCloseMobile={() => setIsMobileMenuOpen(false)}
         />
 
-        <main className="flex-1 bg-[var(--bg-card)] lg:rounded-[24px] lg:border lg:border-[var(--border-color)] shadow-sm p-4 lg:p-8 min-h-full overflow-x-hidden pb-24 lg:pb-8 transition-colors duration-300 w-full max-w-full">
+        <main key={activeTab} className="page-transition flex-1 bg-[var(--bg-card)] lg:rounded-[24px] lg:border lg:border-[var(--border-color)] shadow-sm p-4 lg:p-8 min-h-full overflow-x-hidden pb-24 lg:pb-8 transition-colors duration-300 w-full max-w-full">
           {activeTab === 'karyawan' && <Dashboard />}
           {activeTab === 'medical' && <MedicalPlafond />}
           {activeTab === 'medical_history' && <MedicalHistory />}

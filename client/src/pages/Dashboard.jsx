@@ -643,12 +643,12 @@ const Dashboard = () => {
                   return (
                     <tr key={emp.id} style={{ backgroundColor: isSelected ? 'rgba(181, 29, 34, 0.08)' : 'transparent' }}>
                       {isBulkDeleteAllowed && (
-                        <td data-label="Pilih" style={{ textAlign: 'center' }}>
+                        <td data-label="Pilih" className="text-left md:text-center">
                           <input
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => handleSelectRow(emp.id)}
-                            style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: 'var(--primary-500)' }}
+                            style={{ cursor: 'pointer', width: '18px', height: '18px', accentColor: 'var(--primary-500)' }}
                           />
                         </td>
                       )}
@@ -681,12 +681,12 @@ const Dashboard = () => {
                           {emp.status}
                         </span>
                       </td>
-                      <td data-label="Aksi" style={{ textAlign: 'center' }}>
-                        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                      <td data-label="Aksi" className="text-left sm:text-center">
+                        <div className="flex flex-col sm:flex-row sm:justify-center gap-2">
                           {/* Edit Status & Data Button */}
                           {isEditAllowed ? (
                             <button
-                              className="btn btn-secondary btn-sm"
+                              className="btn btn-secondary btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5"
                               onClick={() => handleOpenEdit(emp)}
                               title="Edit Data / Update Status"
                             >
@@ -695,7 +695,7 @@ const Dashboard = () => {
                             </button>
                           ) : (
                             <button
-                              className="btn btn-secondary btn-sm"
+                              className="btn btn-secondary btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5"
                               disabled
                               title="Akses Ditolak: Anda tidak memiliki izin untuk merubah status."
                             >
@@ -707,7 +707,7 @@ const Dashboard = () => {
                           {/* Hard Delete Button */}
                           {isDeleteAllowed ? (
                             <button
-                              className="btn btn-danger btn-sm"
+                              className="btn btn-danger btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5"
                               onClick={() => handleOpenDelete(emp)}
                               title="Hapus Karyawan Permanen (Hard Delete)"
                             >
@@ -716,7 +716,7 @@ const Dashboard = () => {
                             </button>
                           ) : (
                             <button
-                              className="btn btn-secondary btn-sm"
+                              className="btn btn-secondary btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5"
                               disabled
                               title="Akses Ditolak: Anda tidak memiliki izin menghapus data karyawan."
                             >

@@ -307,14 +307,13 @@ const MedicalHistory = () => {
         
         <div className="page-header-actions">
           {hasExportPermission && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem', width: '100%', justifyContent: 'flex-start' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '1 1 auto' }}>
-                <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>Filter:</span>
-                <input type="date" className="form-control" style={{ flex: '1 1 auto', padding: '0.6rem', fontSize: '0.85em', minWidth: '130px' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
-                <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)' }}>s/d</span>
-                <input type="date" className="form-control" style={{ flex: '1 1 auto', padding: '0.6rem', fontSize: '0.85em', minWidth: '130px' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full justify-start">
+              <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto flex-1">
+                <input type="date" className="form-control w-full" style={{ minWidth: 0, padding: '0.5rem', fontSize: '0.85em' }} value={startDate} onChange={(e) => setStartDate(e.target.value)} title="Dari Tanggal" />
+                <span className="text-xs text-gray-500 font-semibold whitespace-nowrap">s/d</span>
+                <input type="date" className="form-control w-full" style={{ minWidth: 0, padding: '0.5rem', fontSize: '0.85em' }} value={endDate} onChange={(e) => setEndDate(e.target.value)} title="Sampai Tanggal" />
               </div>
-              <button className="btn btn-secondary" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981', flex: '1 1 100%', justifyContent: 'center' }}>
+              <button className="btn btn-secondary w-full sm:w-auto flex justify-center" onClick={handleExportExcel} style={{ borderColor: '#10b981', color: '#10b981' }}>
                 <Download size={16} /> Export Excel
               </button>
             </div>
@@ -380,16 +379,16 @@ const MedicalHistory = () => {
                     </td>
                     <td data-label="PIC (HR)" style={{ fontSize: '0.85em' }}>{h.pic_name || 'System'}</td>
                     {(hasEditPermission || hasDeletePermission) && (
-                      <td data-label="Aksi" style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-                        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
+                      <td data-label="Aksi" className="text-left sm:text-center" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex flex-col sm:flex-row sm:justify-center gap-2">
                           {hasEditPermission && (
-                            <button className="btn btn-secondary btn-sm" onClick={(e) => handleOpenEditModal(h, e)} title="Edit Transaksi">
+                            <button className="btn btn-secondary btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5" onClick={(e) => handleOpenEditModal(h, e)} title="Edit Transaksi">
                               <Edit size={15} color="var(--primary-500)" />
                               Edit
                             </button>
                           )}
                           {hasDeletePermission && (
-                            <button className="btn btn-danger btn-sm" onClick={(e) => handleDelete(h, e)} title="Hapus Transaksi">
+                            <button className="btn btn-danger btn-sm w-full sm:w-auto flex justify-center items-center gap-1.5" onClick={(e) => handleDelete(h, e)} title="Hapus Transaksi">
                               <Trash2 size={15} />
                               Hapus
                             </button>

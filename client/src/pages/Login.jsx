@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Lock, User, ArrowRight, Sun, Moon, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { User, ArrowRight, Sun, Moon, Eye, EyeOff, Loader2, KeyRound } from 'lucide-react';
 import api from '../services/api';
 
 const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
@@ -38,48 +38,44 @@ const Login = () => {
   };
 
   return (
-    <div className="login-split-container">
+    <div className="login-split-container page-transition">
+      {/* Dark Mode Toggle - Positioned top right globally */}
+      <div className="absolute top-6 right-6 lg:top-8 lg:right-8 z-50">
+        <button
+          onClick={toggleTheme}
+          className="w-12 h-12 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-[var(--surface)] border border-gray-200 dark:border-gray-700/50 shadow-sm text-[var(--primary-600)] dark:text-[var(--primary-400)] hover:scale-105 transition-transform"
+          title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
+        >
+          {theme === 'dark' ? <Sun size={20} strokeWidth={1.5} /> : <Moon size={20} strokeWidth={1.5} />}
+        </button>
+      </div>
+
       {/* Left side (Top on mobile) */}
       <div className="login-left-panel">
         {/* Floating Glowing Orbs for "Alive" aesthetic */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse mix-blend-overlay"></div>
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-pulse mix-blend-overlay" style={{ animationDelay: '1s' }}></div>
 
-        <div className="text-center lg:text-left mx-auto lg:mx-0 lg:ml-12 xl:ml-20 flex flex-col h-full justify-center lg:justify-start lg:py-12 relative z-10 px-6 lg:px-0 mt-12 lg:mt-0">
-          <div>
+        <div className="text-center lg:text-left mx-auto lg:mx-0 lg:ml-12 xl:ml-20 flex flex-col h-full justify-center lg:justify-start lg:py-12 relative z-10 px-6 lg:px-0 mt-12 lg:mt-0 pb-24 lg:pb-0">
+          <div className="animate-fade-down">
             <div className="bg-white p-3 rounded-xl inline-block mb-4 lg:mb-10 shadow-lg border border-white/20">
               <img src={LOGO_URL} alt="Semen Merah Putih Logo" className="h-9 lg:h-10 object-contain" />
             </div>
-            <h1 className="text-2xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight mb-2 lg:mb-6 leading-tight text-white drop-shadow-sm">
-              <span className="lg:hidden">HRGA Web Portal</span>
-              <span className="hidden lg:inline">HRGA Web<br />Portal System</span>
+            <h1 className="text-2xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight mb-4 lg:mb-6 leading-tight text-white drop-shadow-sm">
+              HRGA Web <br className="hidden lg:block" />Portal System
             </h1>
-            <div className="hidden lg:block w-12 h-1.5 bg-white mb-6 rounded-full opacity-90 shadow-sm" />
             <p className="text-white/90 text-sm lg:text-lg max-w-md leading-relaxed font-medium mx-auto lg:mx-0 drop-shadow-sm">
-              <span className="lg:hidden">Sistem manajemen operasional terpadu.</span>
-              <span className="hidden lg:inline">Sistem manajemen operasional dan administrasi karyawan terpadu untuk efisiensi dan transparansi lingkungan kerja.</span>
+              Sistem manajemen data administrasi karyawan yang terintegrasi dengan BOT Whatsapp.
             </p>
           </div>
-          <div className="hidden lg:block mt-auto pt-16 text-white/70 text-sm font-semibold tracking-wide">
+          <div className="hidden lg:block mt-auto pt-16 text-white/70 text-sm font-semibold tracking-wide animate-fade-in delay-200">
             PT CEMINDO GEMILANG TBK - PLANT BATAM
           </div>
         </div>
       </div>
 
       {/* Right side (Bottom overlapping card on mobile) */}
-      <div className="login-right-panel">
-        
-        {/* Dark Mode Toggle directly inside right panel */}
-        <div className="absolute top-6 right-6 lg:fixed lg:top-8 lg:right-8 z-50">
-          <button
-            onClick={toggleTheme}
-            className="w-12 h-12 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-[var(--surface)] border border-gray-200 dark:border-gray-700/50 shadow-sm text-[var(--primary-600)] dark:text-[var(--primary-400)] hover:scale-105 transition-transform"
-            title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
-          >
-            {theme === 'dark' ? <Sun size={20} strokeWidth={1.5} /> : <Moon size={20} strokeWidth={1.5} />}
-          </button>
-        </div>
-
+      <div className="login-right-panel animate-fade-up delay-100">
         <div className="login-right-content text-center lg:text-left">
           <div className="mb-10 -mt-2 lg:mt-0">
             <h2 className="text-3xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">Selamat Datang</h2>
@@ -117,8 +113,8 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="w-full flex justify-center items-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-[var(--primary-500)] hover:bg-[var(--primary-600)] focus:outline-none focus:ring-4 focus:ring-[var(--primary-500)]/30 transition-all shadow-[0_4px_14px_0_rgba(225,29,72,0.39)] hover:shadow-[0_6px_20px_rgba(225,29,72,0.23)] hover:-translate-y-0.5"
                   disabled={isResetLoading}
                 >
@@ -126,8 +122,8 @@ const Login = () => {
                 </button>
               </form>
               <div className="text-center mt-6">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="text-sm font-bold text-[var(--primary-500)] hover:text-[var(--primary-600)] transition-colors"
                   onClick={() => setIsForgotPassword(false)}
                 >
@@ -164,7 +160,7 @@ const Login = () => {
                   <label className="block text-sm font-semibold text-[var(--text-primary)] mb-1.5 ml-1">Password</label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
-                      <Lock size={18} />
+                      <KeyRound size={18} />
                     </div>
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -186,14 +182,14 @@ const Login = () => {
 
                 <div className="flex justify-between items-center pt-2">
                   <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-[var(--text-secondary)]">
-                    <input 
-                      type="checkbox" 
-                      className="w-4 h-4 rounded border-gray-300 text-[var(--primary-500)] focus:ring-[var(--primary-500)] accent-[var(--primary-500)]" 
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 rounded border-gray-300 text-[var(--primary-500)] focus:ring-[var(--primary-500)] accent-[var(--primary-500)]"
                     />
                     Remember me
                   </label>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="text-sm font-bold text-[var(--primary-500)] hover:text-[var(--primary-600)] transition-colors"
                     onClick={() => setIsForgotPassword(true)}
                   >
@@ -217,7 +213,7 @@ const Login = () => {
           )}
 
           <div className="mt-12 text-center lg:text-left text-xs font-semibold text-gray-400 dark:text-gray-600 uppercase tracking-wider">
-            &copy; {new Date().getFullYear()} Semen Merah Putih
+            &copy; {new Date().getFullYear()} Semen Merah Putih - Plant Batam
           </div>
         </div>
       </div>

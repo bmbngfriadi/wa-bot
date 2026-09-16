@@ -276,11 +276,11 @@ const UserAdmin = () => {
                   <td data-label="Username" style={{ fontFamily: 'monospace', color: 'var(--primary-500)', fontWeight: 700 }}>@{usr.username}</td>
                   <td data-label="Role Utama">{getRoleBadge(usr.role)}</td>
                   <td data-label="Checklist Fitur Aktif">{renderPermissionPills(usr.permissions)}</td>
-                  <td data-label="Aksi CRUD" style={{ textAlign: 'center' }}>
-                    <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
+                  <td data-label="Aksi CRUD" className="text-left sm:text-center">
+                    <div className="flex flex-col sm:flex-row sm:justify-center gap-2">
                       {/* Edit Username, Nama & Role/Perms */}
                       <button
-                        className="btn btn-secondary btn-sm"
+                        className="btn btn-secondary btn-sm w-full sm:w-auto"
                         onClick={() => handleOpenEdit(usr)}
                         title="Edit Username, Nama & Hak Akses"
                       >
@@ -291,7 +291,7 @@ const UserAdmin = () => {
                       {/* Reset Password Button */}
                       {(currentUser?.role === 'administrator' || currentUser?.permissions?.reset_password) && (
                         <button
-                          className="btn btn-secondary btn-sm"
+                          className="btn btn-secondary btn-sm w-full sm:w-auto"
                           onClick={() => handleOpenResetPass(usr)}
                           title="Riset Password User"
                         >
@@ -303,7 +303,7 @@ const UserAdmin = () => {
                       {/* Delete User */}
                       {usr.id !== currentUser?.id ? (
                         <button
-                          className="btn btn-danger btn-sm"
+                          className="btn btn-danger btn-sm w-full sm:w-auto"
                           onClick={() => handleDeleteUser(usr.id, usr.username)}
                           title="Hapus User"
                         >
@@ -311,7 +311,7 @@ const UserAdmin = () => {
                           Hapus
                         </button>
                       ) : (
-                        <button className="btn btn-secondary btn-sm" disabled title="Tidak dapat menghapus akun sendiri">
+                        <button className="btn btn-secondary btn-sm w-full sm:w-auto" disabled title="Tidak dapat menghapus akun sendiri">
                           <Trash2 size={15} color="#6b7280" />
                           Hapus
                         </button>

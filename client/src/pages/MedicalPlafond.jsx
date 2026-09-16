@@ -208,44 +208,44 @@ const MedicalPlafond = () => {
                     <tr key={emp.id}>
                       <td data-label="No">{index + 1}</td>
                       <td data-label="Karyawan">
-                        <div style={{ fontWeight: 600 }}>{emp.nama_lengkap}</div>
-                        <div style={{ fontSize: '0.8em', color: 'var(--primary-500)', fontFamily: 'monospace' }}>{emp.nik}</div>
-                        <div style={{ fontSize: '0.75em', color: 'var(--text-secondary)' }}>{emp.department}</div>
+                        <div style={{ fontWeight: 600, fontSize: '1.1em' }}>{emp.nama_lengkap}</div>
+                        <div style={{ color: 'var(--primary-500)', fontFamily: 'monospace', fontSize: '0.9em' }}>{emp.nik}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.9em' }}>{emp.department}</div>
                       </td>
                       <td data-label="Golongan"><span style={{ fontWeight: 'bold' }}>{emp.golongan}</span></td>
-                      <td data-label="Rawat Inap" style={{ fontSize: '0.85em' }}>
+                      <td data-label="Rawat Inap">
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_inap_total)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Inap Total'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaInap)}</div>
-                        <div style={{ fontSize: '0.75em', color: 'var(--text-secondary)', marginTop: '4px' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
+                        <div style={{ color: 'var(--text-secondary)', marginTop: '4px', fontSize: '0.9em' }}>Kamar/Malam: {formatRp(emp.limits.rawat_inap_kamar)}</div>
                       </td>
-                      <td data-label="Rawat Jalan" style={{ fontSize: '0.85em' }}>
+                      <td data-label="Rawat Jalan">
                         <div><b>Limit:</b> {formatRp(emp.limits.rawat_jalan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Rawat Jalan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaJalan)}</div>
                       </td>
-                      <td data-label="Kacamata" style={{ fontSize: '0.85em' }}>
+                      <td data-label="Kacamata">
                         <div><b>Limit:</b> {formatRp(emp.limits.kacamata)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Kacamata'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaKacamata)}</div>
                       </td>
-                      <td data-label="Persalinan" style={{ fontSize: '0.85em' }}>
+                      <td data-label="Persalinan">
                         <div><b>Limit:</b> {formatRp(emp.limits.persalinan)}</div>
                         <div style={{ color: '#ef4444' }}><b>Pakai:</b> {formatRp(emp.usage['Persalinan'])}</div>
                         <div style={{ color: '#10b981' }}><b>Sisa:</b> {formatRp(sisaPersalinan)}</div>
                       </td>
-                      <td data-label="Aksi" style={{ textAlign: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'center' }}>
-                          <button className="btn btn-secondary btn-sm" onClick={() => handleOpenHistory(emp)} style={{ width: '100%' }}>
+                      <td data-label="Aksi" className="text-left md:text-center">
+                        <div className="flex flex-col gap-2 mx-auto w-full md:w-max">
+                          <button className="btn btn-secondary btn-sm w-full flex justify-center" onClick={() => handleOpenHistory(emp)}>
                             <History size={14} /> Riwayat
                           </button>
                           {(user?.role === 'administrator' || user?.permissions?.reset_pass_bot) && (
-                            <button className="btn btn-secondary btn-sm" onClick={() => handleOpenResetPassword(emp)} style={{ width: '100%', borderColor: '#f59e0b', color: '#d97706' }}>
+                            <button className="btn btn-secondary btn-sm w-full flex justify-center" onClick={() => handleOpenResetPassword(emp)} style={{ borderColor: '#f59e0b', color: '#d97706' }}>
                               <KeyRound size={14} /> Reset Pass Bot
                             </button>
                           )}
                           {user?.role === 'administrator' && (
-                            <button className="btn btn-secondary btn-sm" onClick={() => handleResetBudget(emp)} style={{ width: '100%', borderColor: '#ef4444', color: '#ef4444' }}>
+                            <button className="btn btn-secondary btn-sm w-full flex justify-center" onClick={() => handleResetBudget(emp)} style={{ borderColor: '#ef4444', color: '#ef4444' }}>
                               <RefreshCw size={14} /> Reset Budget
                             </button>
                           )}

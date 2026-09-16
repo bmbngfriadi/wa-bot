@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @layer base {
   :root {
@@ -47,21 +48,89 @@
     @apply w-full px-4 py-3 bg-[var(--bg-color)] border border-[var(--border-color)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)]/50 focus:border-[var(--primary-500)] transition-all;
   }
 
+  .checkbox-group {
+    @apply flex items-center gap-2.5 cursor-pointer;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    @apply w-4 h-4 text-[var(--primary-500)] rounded cursor-pointer border-[var(--border-color)];
+  }
+
   /* Split Layouts (Login) */
   .login-split-container {
     @apply flex flex-col lg:flex-row min-h-screen bg-[var(--bg-color)] relative overflow-hidden;
   }
   
   .login-left-panel {
-    @apply relative w-full lg:w-1/2 min-h-[40vh] lg:min-h-screen bg-gradient-to-br from-[var(--primary-700)] via-[var(--primary-600)] to-[var(--primary-500)] overflow-hidden;
+    @apply relative w-full lg:w-1/2 min-h-[40vh] lg:min-h-screen bg-cover bg-center overflow-hidden;
+    background-image: url('/login-bg.jpg');
+  }
+
+  .login-left-panel::before {
+    content: '';
+    @apply absolute inset-0 z-0;
+    background: linear-gradient(135deg, rgba(181, 32, 37, 0.90) 0%, rgba(133, 23, 27, 0.96) 50%, rgba(181, 32, 37, 0.90) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+
+  .login-left-panel::after {
+    content: '';
+    @apply absolute inset-0 z-0 opacity-[0.07] pointer-events-none mix-blend-overlay;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* --- Animations --- */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-down {
+    animation: fadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .page-transition {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  
   .login-right-panel {
-    @apply relative w-full lg:w-1/2 flex items-center justify-center -mt-10 lg:mt-0 bg-[var(--bg-color)] lg:bg-transparent rounded-t-[40px] lg:rounded-none z-10 shadow-[0_-20px_40px_rgba(0,0,0,0.1)] lg:shadow-none;
+    @apply relative w-full lg:w-1/2 flex items-center justify-center -mt-24 lg:mt-0 bg-[var(--bg-color)] lg:bg-transparent rounded-t-[40px] lg:rounded-none z-10 shadow-[0_-20px_40px_rgba(0,0,0,0.1)] lg:shadow-none;
   }
   
   .login-right-content {
-    @apply w-full max-w-md px-8 py-10 lg:p-12 mx-auto;
+    @apply w-full max-w-md px-8 py-10 lg:p-12 mx-auto lg:bg-white lg:border lg:border-gray-200 lg:rounded-3xl lg:shadow-xl lg:dark:bg-[var(--bg-card)] lg:dark:border-[var(--border-color)];
   }
 
   /* Legacy wa-bot Component Mappings for Cemindo Premium Design */
@@ -120,7 +189,7 @@
   }
 
   .table-container {
-    @apply w-full overflow-x-auto rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-sm mb-6;
+    @apply w-full overflow-x-auto;
   }
   .data-table {
     @apply w-full text-left text-sm whitespace-nowrap border-collapse;
@@ -141,14 +210,12 @@
       border-spacing: 0;
       border: none;
     }
-    .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+    .data-table thead {
+      display: none;
+    }
+    .data-table, .data-table tbody, .data-table th, .data-table td, .data-table tr {
       display: block;
       width: 100%;
-    }
-    .data-table thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
     }
     .data-table tr {
       border: 1px solid var(--border-color);
@@ -167,12 +234,13 @@
       text-align: left;
       white-space: normal;
       width: 100%;
+      font-size: 1rem;
     }
     .data-table td::before {
       content: attr(data-label);
       display: block;
-      margin-bottom: 8px;
-      font-size: 0.75rem;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
       font-weight: 800;
       color: var(--text-secondary);
       text-transform: uppercase;
@@ -185,11 +253,11 @@
     .data-table td:last-child::before {
       display: none;
     }
-    .table-container {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
+    .table-wrapper-card {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
     }
   }
 
@@ -197,10 +265,10 @@
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold capitalize;
   }
   .badge-aktif {
-    @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
+    @apply bg-green-100 text-green-800 font-bold dark:bg-green-900/40 dark:text-green-400;
   }
   .badge-nonaktif {
-    @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400;
+    @apply bg-orange-100 text-orange-800 font-bold dark:bg-orange-900/40 dark:text-orange-400;
   }
   .badge-role-admin {
     @apply bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400;

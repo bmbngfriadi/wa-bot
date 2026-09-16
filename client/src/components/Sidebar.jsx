@@ -54,8 +54,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
             <div className="flex items-center gap-3">
               <img src={LOGO_URL} alt="Cemindo Gemilang Logo" className="h-10 object-contain" />
               <div>
-                <h2 className="text-lg font-extrabold text-[var(--text-primary)] tracking-tight leading-none">Cemindo HRGA</h2>
-                <p className="text-xs text-[var(--text-secondary)] mt-1 font-medium">Plant Batam Portal</p>
+                <h2 className="text-base font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">HRGA Web Portal System</h2>
               </div>
             </div>
             
@@ -148,12 +147,6 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-extrabold text-[var(--text-primary)]">Menu Lainnya</h3>
               <div className="flex items-center gap-3">
-                <button
-                  onClick={toggleTheme}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-color)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
-                >
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
                 <button className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-color)] border border-[var(--border-color)] text-[var(--text-secondary)]" onClick={() => setIsMoreOpen(false)}>
                   <X size={20}/>
                 </button>
