@@ -136,8 +136,14 @@
   }
   
   @media (max-width: 768px) {
+    .data-table {
+      border-collapse: separate;
+      border-spacing: 0;
+      border: none;
+    }
     .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
       display: block;
+      width: 100%;
     }
     .data-table thead tr {
       position: absolute;
@@ -150,14 +156,17 @@
       margin-bottom: 1rem;
       background: var(--bg-card);
       overflow: hidden;
+      /* Prevent margin collapse and table rendering artifacts */
+      display: flex;
+      flex-direction: column;
     }
     .data-table td {
       border: none;
       border-bottom: 1px solid var(--border-color);
-      display: block;
       padding: 16px;
       text-align: left;
       white-space: normal;
+      width: 100%;
     }
     .data-table td::before {
       content: attr(data-label);
@@ -171,7 +180,6 @@
     }
     .data-table td:last-child {
       border-bottom: 0;
-      justify-content: center;
       padding-left: 16px;
     }
     .data-table td:last-child::before {
