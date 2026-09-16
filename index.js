@@ -118,6 +118,9 @@ async function sendBudgetReport(msg, emp) {
     const limits = getMedicalLimits(emp.golongan);
     const [trx] = await db.query(`SELECT kategori, SUM(nominal) as total FROM medical_transactions WHERE karyawan_id = ? AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE) GROUP BY kategori`, [emp.id]);
     
+    // Ambil transaksi terakhir
+    const [lastTrx] = await db.query(`SELECT kategori, nominal, tanggal, deskripsi FROM medical_transactions WHERE karyawan_id = ? ORDER BY tanggal DESC, id DESC LIMIT 1`, [emp.id]);
+
     const usage = {
         'Rawat Inap Total': 0,
         'Rawat Jalan': 0,
@@ -131,7 +134,15 @@ async function sendBudgetReport(msg, emp) {
     const sisaKacamata = limits.kacamata - usage['Kacamata'];
     const sisaPersalinan = limits.persalinan - usage['Persalinan'];
 
-    const report = `🏥 *LAPORAN SISA BUDGET MEDICAL PLAFOND*\n👤 *${emp.nama_lengkap}* (${emp.nik})\n════════════════════════════════════\n\n🛏️ *Rawat Inap*\n- Limit Tahunan: ${formatRp(limits.rawat_inap_total)}\n- Sisa Budget  : *${formatRp(sisaInap)}*\n_(Maks Kamar/Malam: ${formatRp(limits.rawat_inap_kamar)})_\n\n🩺 *Rawat Jalan*\n- Limit Tahunan: ${formatRp(limits.rawat_jalan)}\n- Sisa Budget  : *${formatRp(sisaJalan)}*\n\n👓 *Bantuan Kacamata*\n- Limit Tahunan: ${formatRp(limits.kacamata)}\n- Sisa Budget  : *${formatRp(sisaKacamata)}*\n\n👶 *Biaya Persalinan*\n- Limit Tahunan: ${formatRp(limits.persalinan)}\n- Sisa Budget  : *${formatRp(sisaPersalinan)}*\n\n${getFooter()}`;
+    let report = `🏥 *LAPORAN SISA BUDGET MEDICAL PLAFOND*\n👤 *${emp.nama_lengkap}* (${emp.nik})\n════════════════════════════════════\n\n🛏️ *Rawat Inap*\n- Limit Tahunan: ${formatRp(limits.rawat_inap_total)}\n- Sisa Budget  : *${formatRp(sisaInap)}*\n_(Maks Kamar/Malam: ${formatRp(limits.rawat_inap_kamar)})_\n\n🩺 *Rawat Jalan*\n- Limit Tahunan: ${formatRp(limits.rawat_jalan)}\n- Sisa Budget  : *${formatRp(sisaJalan)}*\n\n👓 *Bantuan Kacamata*\n- Limit Tahunan: ${formatRp(limits.kacamata)}\n- Sisa Budget  : *${formatRp(sisaKacamata)}*\n\n👶 *Biaya Persalinan*\n- Limit Tahunan: ${formatRp(limits.persalinan)}\n- Sisa Budget  : *${formatRp(sisaPersalinan)}*\n`;
+
+    if (lastTrx.length > 0) {
+        const lt = lastTrx[0];
+        const dateStr = new Date(lt.tanggal).toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        report += `\n📝 *Riwayat Pemotongan Terakhir*\n- Tanggal: ${dateStr}\n- Kategori: ${lt.kategori}\n- Nominal: ${formatRp(parseFloat(lt.nominal))}\n- Ket: ${lt.deskripsi || '-'}\n`;
+    }
+
+    report += `\n${getFooter()}`;
 
     await safeReply(msg, report);
 }
