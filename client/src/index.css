@@ -1051,22 +1051,25 @@ body {
 @media (max-width: 768px) {
   .login-split-container {
     flex-direction: column;
+    background: var(--bg-login);
   }
   
   .login-left-panel {
     flex: none;
-    padding: 3rem 1.5rem 4.5rem 1.5rem; /* extra bottom padding for overlap */
+    padding: 3.5rem 1.5rem 5.5rem 1.5rem; /* extra deep bottom padding for big overlap */
     align-items: center;
     text-align: center;
     background: 
-      linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-      linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      radial-gradient(circle at top left, var(--primary-500) 0%, var(--primary-700) 100%);
     background-size: 20px 20px, 20px 20px, 100% 100%;
+    box-shadow: inset 0 -20px 40px rgba(0,0,0,0.1);
   }
   
   .login-brand-wrapper {
     align-items: center;
+    animation: loginSlideDown 0.6s ease-out;
   }
   
   .login-left-content {
@@ -1077,15 +1080,24 @@ body {
   }
 
   .login-left-content h1 {
-    font-size: 1.75rem;
+    font-size: 2.1rem;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    letter-spacing: -0.5px;
   }
 
   .login-left-content hr {
-    display: none;
+    display: block;
+    width: 60px;
+    border: none;
+    border-top: 4px solid rgba(255,255,255,0.7);
+    margin: 1.25rem 0;
+    border-radius: 4px;
   }
 
   .login-left-content p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    font-weight: 500;
   }
   
   .login-footer-text {
@@ -1094,13 +1106,14 @@ body {
   
   .login-right-panel {
     flex: 1;
-    border-radius: 30px 30px 0 0;
-    margin-top: -40px; /* overlapping effect */
+    border-radius: 36px 36px 0 0;
+    margin-top: -60px; /* massive overlapping effect */
     z-index: 2;
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 1.5rem 2.5rem 1.5rem;
     justify-content: flex-start;
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-login) 100%);
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+    background: var(--bg-card);
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.15);
+    animation: loginSlideUp 0.6s ease-out;
   }
 
   .login-right-content {
@@ -1108,5 +1121,17 @@ body {
     padding: 0;
     box-shadow: none;
     border: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @keyframes loginSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes loginSlideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
