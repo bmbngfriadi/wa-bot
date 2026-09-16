@@ -56,7 +56,7 @@ const Login = () => {
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse mix-blend-overlay"></div>
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-pulse mix-blend-overlay" style={{ animationDelay: '1s' }}></div>
 
-        <div className="text-center lg:text-left mx-auto lg:mx-0 lg:ml-12 xl:ml-20 flex flex-col h-full justify-center lg:justify-start lg:py-12 relative z-10 px-6 lg:px-0 mt-12 lg:mt-0 pb-24 lg:pb-0">
+        <div className="text-center lg:text-left mx-auto lg:mx-0 lg:ml-12 xl:ml-20 flex flex-col h-full justify-center lg:justify-start lg:py-12 relative z-10 px-6 lg:px-0 mt-12 lg:mt-0 pb-24 lg:pb-12">
           <div className="animate-fade-down">
             <div className="bg-white p-3 rounded-xl inline-block mb-4 lg:mb-10 shadow-lg border border-white/20">
               <img src={LOGO_URL} alt="Semen Merah Putih Logo" className="h-9 lg:h-10 object-contain" />

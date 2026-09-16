@@ -407,7 +407,7 @@ const MedicalHistory = () => {
       {/* --- MODAL: POTONG BUDGET --- */}
       {isDeductModalOpen && (
         <div className="modal-overlay" onClick={() => setIsDeductModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ overflow: 'visible' }}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <HeartPulse size={22} color="var(--primary-500)" />
@@ -575,7 +575,7 @@ const MedicalHistory = () => {
       {/* --- MODAL: EDIT TRANSAKSI --- */}
       {isEditModalOpen && (
         <div className="modal-overlay" onClick={() => setIsEditModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ overflow: 'visible' }}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <Edit size={22} color="var(--primary-500)" />

@@ -284,10 +284,10 @@
   }
 
   .modal-overlay {
-    @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6 z-50;
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto flex flex-col p-0 sm:p-6;
   }
   .modal-content {
-    @apply w-full sm:max-w-xl bg-[var(--bg-card)] border border-[var(--border-color)] rounded-t-[32px] sm:rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl;
+    @apply w-full sm:max-w-xl bg-[var(--bg-card)] border border-[var(--border-color)] rounded-t-[32px] sm:rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl mt-auto sm:m-auto;
     animation: slide-up-sheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @media (min-width: 640px) {
