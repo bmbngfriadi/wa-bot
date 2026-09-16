@@ -22,6 +22,11 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -53,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   }, [user?.id]);
 
   const toggleTheme = (selectedTheme) => {
-    if (selectedTheme) {
+    if (typeof selectedTheme === 'string') {
       setTheme(selectedTheme);
     } else {
       setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
