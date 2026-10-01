@@ -13,7 +13,7 @@ import RoleChecklistModal from './components/RoleChecklistModal';
 import ResetPassword from './components/ResetPassword';
 import { Sun, Moon } from 'lucide-react';
 
-const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
+const LOGO_URL = '/wa-bot/logo.png';
 
 const MainLayout = () => {
   const { user, sessionExpiredMessage, setSessionExpiredMessage, theme, toggleTheme } = useContext(AuthContext);

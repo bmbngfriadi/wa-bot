@@ -13,7 +13,6 @@ const client = new Client({
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
-            '--single-process',
             '--disable-gpu',
             '--disable-software-rasterizer',
             '--mute-audio'
@@ -110,13 +109,23 @@ async function handleEmployeeSearch(queryParam, msg) {
     }
 
     if (employee && employee.status === 'Aktif') {
-        const activeReplyText = `✅ *VERIFIKASI DATA KARYAWAN AKTIF*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\nBenar bahwa data karyawan di bawah ini berstatus *AKTIF* di PT Cemindo Gemilang Tbk (Plant Batam).\n\n📋 *DETAIL PROFILE:*\n👤 *Nama Lengkap*  : *${employee.nama_lengkap}*\n🆔 *NIK Karyawan*  : \`${employee.nik}\`\n🚻 *Jenis Kelamin* : ${employee.jenis_kelamin || 'Laki-laki'}\n🏢 *Department*    : ${employee.department}\n🟢 *Status Kerja*   : *AKTIF*\n\n👨‍👩‍👧‍👦 *DATA KELUARGA:*\n👩 *Istri*  : ${employee.nama_istri || '-'}\n👦 *Anak 1* : ${employee.nama_anak_pertama || '-'}\n👦 *Anak 2* : ${employee.nama_anak_kedua || '-'}\n👦 *Anak 3* : ${employee.nama_anak_ketiga || '-'}\n\n${getFooter()}`;
+        const matchCtx = getMatchContext(employee, queryParam);
+        const familyMatches = matchCtx.filter(c => c.includes('dari Karyawan'));
+        let matchNote = '';
+        if (familyMatches.length > 0) matchNote = `\n📌 *Pencarian Cocok Sebagai:* ${familyMatches.join(', ')}\n`;
+        
+        const activeReplyText = `✅ *VERIFIKASI DATA KARYAWAN AKTIF*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\nBenar bahwa data karyawan di bawah ini berstatus *AKTIF* di PT Cemindo Gemilang Tbk (Plant Batam).\n${matchNote}\n📋 *DETAIL PROFILE:*\n👤 *Nama Lengkap*  : *${employee.nama_lengkap}*\n🆔 *NIK Karyawan*  : \`${employee.nik}\`\n🚻 *Jenis Kelamin* : ${employee.jenis_kelamin || 'Laki-laki'}\n🏢 *Department*    : ${employee.department}\n🟢 *Status Kerja*   : *AKTIF*\n\n👨‍👩‍👧‍👦 *DATA KELUARGA:*\n👩 *Istri*  : ${employee.nama_istri || '-'}\n👦 *Anak 1* : ${employee.nama_anak_pertama || '-'}\n👦 *Anak 2* : ${employee.nama_anak_kedua || '-'}\n👦 *Anak 3* : ${employee.nama_anak_ketiga || '-'}\n\n${getFooter()}`;
         await safeReply(msg, activeReplyText);
         return;
     } 
     
     if (employee && employee.status !== 'Aktif') {
-        const nonActiveReplyText = `⚠️ *KARYAWAN SUDAH TIDAK AKTIF*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\nData ditemukan, namun status karyawan bersangkutan saat ini adalah *${employee.status.toUpperCase()}*.\n\n📋 *DETAIL DATA:*\n👤 *Nama Lengkap*  : *${employee.nama_lengkap}*\n🆔 *NIK Karyawan*  : \`${employee.nik}\`\n🏢 *Department*    : ${employee.department}\n🔴 *Status Kerja*   : *${employee.status.toUpperCase()}*\n\n${getFooter()}`;
+        const matchCtx = getMatchContext(employee, queryParam);
+        const familyMatches = matchCtx.filter(c => c.includes('dari Karyawan'));
+        let matchNote = '';
+        if (familyMatches.length > 0) matchNote = `\n📌 *Pencarian Cocok Sebagai:* ${familyMatches.join(', ')}\n`;
+        
+        const nonActiveReplyText = `⚠️ *KARYAWAN SUDAH TIDAK AKTIF*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\nData ditemukan, namun status karyawan bersangkutan saat ini adalah *${employee.status.toUpperCase()}*.\n${matchNote}\n📋 *DETAIL DATA:*\n👤 *Nama Lengkap*  : *${employee.nama_lengkap}*\n🆔 *NIK Karyawan*  : \`${employee.nik}\`\n🏢 *Department*    : ${employee.department}\n🔴 *Status Kerja*   : *${employee.status.toUpperCase()}*\n\n${getFooter()}`;
         await safeReply(msg, nonActiveReplyText);
         return;
     }
@@ -347,3 +356,19 @@ client.on('message_create', async msg => {
 });
 
 client.initialize();
+
+// Graceful Shutdown to prevent SingletonLock issues
+const gracefulShutdown = async (signal) => {
+    console.log(`[WA-BOT] ⚠️ Menerima sinyal ${signal}. Menutup browser dengan aman...`);
+    try {
+        await client.destroy();
+        console.log('[WA-BOT] ✅ Browser Chromium berhasil ditutup.');
+        process.exit(0);
+    } catch (err) {
+        console.error('[WA-BOT] ❌ Gagal menutup browser:', err);
+        process.exit(1);
+    }
+};
+
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));

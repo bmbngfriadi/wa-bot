@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { User, ArrowRight, Sun, Moon, Eye, EyeOff, Loader2, KeyRound } from 'lucide-react';
 import api from '../services/api';
 
-const LOGO_URL = 'https://i.ibb.co.com/prMYS06h/LOGO-2025-03.png';
+const LOGO_URL = '/wa-bot/logo.png';
 
 const Login = () => {
   const { login, loading, error, theme, toggleTheme } = useContext(AuthContext);

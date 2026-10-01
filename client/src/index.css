@@ -19,12 +19,12 @@
   }
 
   [data-theme='dark'] {
-    --bg-color: #0f172a;
-    --bg-card: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-    --surface: #1e293b;
+    --bg-color: #000000;
+    --bg-card: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --border-color: #27272a;
+    --surface: #111111;
   }
 
   body {
@@ -106,24 +106,24 @@
   }
 
   .animate-fade-up {
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-fade-down {
-    animation: fadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.2s ease-out forwards;
   }
   
   .page-transition {
-    animation: fadeIn 0.4s ease-out;
+    animation: fadeIn 0.2s ease-out;
   }
 
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
+  .delay-100 { animation-delay: 0ms; }
+  .delay-200 { animation-delay: 0ms; }
+  .delay-300 { animation-delay: 0ms; }
   
   .login-right-panel {
     @apply relative w-full lg:w-1/2 flex items-center justify-center -mt-24 lg:mt-0 bg-[var(--bg-color)] lg:bg-transparent rounded-t-[40px] lg:rounded-none z-10 shadow-[0_-20px_40px_rgba(0,0,0,0.1)] lg:shadow-none;

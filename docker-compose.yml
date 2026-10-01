@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # 1. Layanan Database PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: wabot_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Gamaadmin53
+      POSTGRES_DB: cemindo_hr
+    ports:
+      - "5432:5432" # Mengekspos port 5432 ke host (opsional, untuk admin)
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Mount folder lokal 'data-import-database' ke entrypoint Docker
+      # Letakkan file dump .sql Anda di dalam folder 'data-import-database'
+      - ./data-import-database:/docker-entrypoint-initdb.d
+
+  # 2. Layanan API Backend (Express)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wabot_backend
+    restart: unless-stopped
+    command: npm run server
+    ports:
+      - "5005:5005"
+    environment:
+      # Variabel env ditimpa di sini agar sesuai dengan service docker
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=Gamaadmin53
+      - DB_NAME=cemindo_hr
+      - DB_PORT=5432
+      - PORT=5005
+    depends_on:
+      - db
+    volumes:
+      - wwebjs_auth:/app/.wwebjs_auth
+      - wwebjs_cache:/app/.wwebjs_cache
+
+  # 3. Layanan WA Bot Worker
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wabot_worker
+    restart: unless-stopped
+    command: npm run bot
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=Gamaadmin53
+      - DB_NAME=cemindo_hr
+      - DB_PORT=5432
+    depends_on:
+      - db
+    volumes:
+      # Worker dan backend berbagi folder sesi WA agar tersinkron
+      - wwebjs_auth:/app/.wwebjs_auth
+      - wwebjs_cache:/app/.wwebjs_cache
+
+  # 4. Layanan Web Frontend (Vite + Nginx)
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: wabot_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80" # Akses web di port 5173 host
+    depends_on:
+      - backend
+
+# Deklarasi Named Volumes agar persisten
+volumes:
+  pgdata:
+  wwebjs_auth:
+  wwebjs_cache:
