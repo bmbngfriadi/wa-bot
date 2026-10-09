@@ -437,6 +437,12 @@ client.on('message_create', async msg => {
     }
 });
 
+client.on('disconnected', (reason) => {
+    console.error('[WA-BOT] ❌ WhatsApp Client terputus! Alasan:', reason);
+    console.log('[WA-BOT] ⚠️ Restarting process untuk recovery otomatis...');
+    process.exit(1);
+});
+
 client.initialize();
 
 // Graceful Shutdown to prevent SingletonLock issues
