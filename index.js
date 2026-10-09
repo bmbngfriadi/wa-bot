@@ -1,7 +1,20 @@
+const fs = require('fs');
+const path = require('path');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const db = require('./db');
 const { getMedicalLimits } = require('./medicalUtils');
+
+// Cleanup stale Chromium locks before initializing
+const lockPath = path.join(__dirname, '.wwebjs_auth', 'session', 'SingletonLock');
+if (fs.existsSync(lockPath)) {
+    try {
+        fs.unlinkSync(lockPath);
+        console.log('[WA-BOT] 🧹 SingletonLock lama berhasil dihapus secara otomatis.');
+    } catch (e) {
+        console.error('[WA-BOT] ⚠️ Gagal menghapus SingletonLock:', e.message);
+    }
+}
 
 const client = new Client({
     authStrategy: new LocalAuth(),
