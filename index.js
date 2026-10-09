@@ -248,6 +248,8 @@ client.on('message_create', async msg => {
         if (upperText === '1') {
             selectedMenu = 'menu_data_karyawan';
         } else if (upperText === '2') {
+            selectedMenu = 'menu_info_biaya';
+        } else if (upperText === '3') {
             selectedMenu = 'menu_plafon_medis';
         }
 
@@ -274,7 +276,7 @@ client.on('message_create', async msg => {
         }
         if (isHelpCommand) {
             session.state = 'IDLE';
-            const welcomeText = `🤖 *WA BOT HRGA PORTAL AUTOMATION*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\n\nSelamat datang! Silakan pilih menu layanan di bawah ini dengan membalas angka (contoh: 1 atau 2):\n\n*1.* 🔍 Cek Data Karyawan\n*2.* 🏥 Cek Sisa Budget Medical Plafond\n\n_(Ketik *BATAL* kapan saja untuk mengakhiri sesi)_\n════════════════════════════════════\n⏱️ _${getWibTimestamp()}_`;
+            const welcomeText = `🤖 *WA BOT HRGA PORTAL AUTOMATION*\n🏢 *PT CEMINDO GEMILANG TBK - PLANT BATAM*\n════════════════════════════════════\n\nSelamat datang! Silakan pilih menu layanan di bawah ini dengan membalas angka (contoh: 1 atau 2):\n\n*1.* 🔍 Cek Data Karyawan\n*2.* 🏥 Informasi Biaya Pengobatan\n*3.* 🏥 Cek Sisa Budget Medical Plafond\n\n_(Ketik *BATAL* kapan saja untuk mengakhiri sesi)_\n════════════════════════════════════\n⏱️ _${getWibTimestamp()}_`;
             await safeReply(msg, welcomeText);
             return;
         }
@@ -284,6 +286,10 @@ client.on('message_create', async msg => {
             if (selectedMenu === 'menu_data_karyawan') {
                 session.state = 'WAIT_CEK_DATA';
                 await safeReply(msg, "🔍 *CEK DATA KARYAWAN*\nSilakan ketikkan *Nama* atau *NIK* karyawan yang ingin dicari (Contoh: Budi atau 2024001):");
+                return;
+            } else if (selectedMenu === 'menu_info_biaya') {
+                session.state = 'WAIT_RS_NIK';
+                await safeReply(msg, "🏥 *INFORMASI BIAYA PENGOBATAN*\nSilakan ketikkan *NIK Karyawan* yang berobat:");
                 return;
             } else if (selectedMenu === 'menu_plafon_medis') {
                 session.state = 'WAIT_NIK_BUDGET';
@@ -347,6 +353,69 @@ client.on('message_create', async msg => {
             session.state = 'IDLE';
             await sendBudgetReport(msg, emp);
             delete session.employee;
+            return;
+        }
+
+        if (session.state === 'WAIT_RS_NIK') {
+            const [rows] = await db.query('SELECT * FROM karyawan WHERE nik = ?', [rawText]);
+            if (rows.length === 0) {
+                await safeReply(msg, "❌ NIK tidak ditemukan di sistem. Silakan coba ketik NIK dengan benar atau ketik *BATAL*.");
+                return;
+            }
+            session.employee = rows[0];
+            session.state = 'WAIT_RS_TIPE';
+            await safeReply(msg, `Karyawan ditemukan: *${rows[0].nama_lengkap}*.\n\nSilakan ketikkan *Tipe Pengobatan*:\nKetik *RJ* untuk Rawat Jalan\nKetik *RI* untuk Rawat Inap`);
+            return;
+        }
+
+        if (session.state === 'WAIT_RS_TIPE') {
+            if (upperText !== 'RJ' && upperText !== 'RI') {
+                await safeReply(msg, "❌ Pilihan tidak valid.\nKetik *RJ* untuk Rawat Jalan\nKetik *RI* untuk Rawat Inap\n(Ketik *BATAL* untuk keluar)");
+                return;
+            }
+            session.med_tipe = upperText === 'RJ' ? 'Rawat Jalan' : 'Rawat Inap Total';
+            session.state = 'WAIT_RS_DIAGNOSA';
+            await safeReply(msg, `Tipe Pengobatan: *${session.med_tipe}*\n\nSilakan ketikkan *Diagnosa* (contoh: Demam Berdarah):`);
+            return;
+        }
+
+        if (session.state === 'WAIT_RS_DIAGNOSA') {
+            session.med_diagnosa = rawText;
+            session.state = 'WAIT_RS_BIAYA';
+            await safeReply(msg, `Diagnosa: *${session.med_diagnosa}*\n\nSilakan ketikkan *Total Biaya* (Hanya angka, contoh: 500000):`);
+            return;
+        }
+
+        if (session.state === 'WAIT_RS_BIAYA') {
+            const biaya = parseInt(rawText.replace(/\D/g, ''));
+            if (isNaN(biaya) || biaya <= 0) {
+                await safeReply(msg, "❌ Nominal biaya tidak valid. Pastikan hanya memasukkan angka (contoh: 500000). Silakan coba lagi:");
+                return;
+            }
+            session.med_biaya = biaya;
+            
+            const emp = session.employee;
+            
+            // Format tanggal to YYYY-MM-DD
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const today = `${year}-${month}-${day}`;
+
+            const deskripsi = `Diagnosa: ${session.med_diagnosa} (Via WA Bot)`;
+            
+            await db.query(
+                'INSERT INTO medical_transactions (karyawan_id, kategori, nominal, deskripsi, tanggal, created_by, foto_bukti) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                [emp.id, session.med_tipe, session.med_biaya, deskripsi, today, null, null]
+            );
+            
+            session.state = 'IDLE';
+            await safeReply(msg, `✅ *DATA BERHASIL DISIMPAN*\n\nTerima kasih, data biaya pengobatan untuk *${emp.nama_lengkap}* sebesar *${formatRp(session.med_biaya)}* telah masuk ke sistem dan memotong plafond medical karyawan.\n\n${getFooter()}`);
+            delete session.employee;
+            delete session.med_tipe;
+            delete session.med_diagnosa;
+            delete session.med_biaya;
             return;
         }
 
