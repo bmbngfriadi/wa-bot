@@ -257,15 +257,15 @@ const Dashboard = () => {
   // Download Bulk Import Excel Template
   const handleDownloadTemplate = () => {
     const templateData = [
-      ['NIK', 'NAMA_LENGKAP', 'JENIS_KELAMIN', 'DEPARTMENT', 'STATUS', 'NAMA_ISTRI', 'NAMA_ANAK_PERTAMA', 'NAMA_ANAK_KEDUA', 'NAMA_ANAK_KETIGA'],
-      ['2024001', 'Budi Santoso', 'Laki-laki', 'Produksi', 'Aktif', 'Siti', 'Agus', '-', '-'],
-      ['2024002', 'Siti Rahma', 'Perempuan', 'HRD', 'Aktif', '-', 'Rini', 'Dino', '-'],
-      ['2024003', 'Dedi Kurniawan', 'Laki-laki', 'Maintenance', 'Aktif', 'Ayu', 'Rendi', '-', '-']
+      ['NIK', 'NAMA_LENGKAP', 'JENIS_KELAMIN', 'DEPARTMENT', 'GOLONGAN', 'STATUS', 'NAMA_ISTRI', 'NAMA_ANAK_PERTAMA', 'NAMA_ANAK_KEDUA', 'NAMA_ANAK_KETIGA'],
+      ['2024001', 'Budi Santoso', 'Laki-laki', 'Produksi', '4 (A-B)', 'Aktif', 'Siti', 'Agus', '-', '-'],
+      ['2024002', 'Siti Rahma', 'Perempuan', 'HRD', '2 (B-D)', 'Aktif', '-', 'Rini', 'Dino', '-'],
+      ['2024003', 'Dedi Kurniawan', 'Laki-laki', 'Maintenance', '6 (A-B)', 'Aktif', 'Ayu', 'Rendi', '-', '-']
     ];
 
     const worksheet = XLSX.utils.aoa_to_sheet(templateData);
     worksheet['!cols'] = [
-      { wch: 14 }, { wch: 26 }, { wch: 16 }, { wch: 20 }, { wch: 14 }, { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 }
+      { wch: 14 }, { wch: 26 }, { wch: 16 }, { wch: 20 }, { wch: 14 }, { wch: 14 }, { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 }
     ];
 
     const workbook = XLSX.utils.book_new();
