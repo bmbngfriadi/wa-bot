@@ -50,29 +50,13 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       <aside className="hidden lg:flex w-64 xl:w-72 flex-shrink-0 bg-[var(--bg-card)] rounded-[24px] shadow-sm border border-[var(--border-color)] flex-col justify-between p-6 sticky top-6 h-[calc(100vh-3rem)] z-40 transition-colors duration-300">
         <div>
           {/* Official Brand Logo */}
-          <div className="flex items-center justify-between mb-8 px-1">
+          <div className="flex items-center mb-8 px-1">
             <div className="flex items-center gap-3">
               <img src={LOGO_URL} alt="Cemindo Gemilang Logo" className="h-10 object-contain" />
               <div>
                 <h2 className="text-base font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">HRGA Web Portal System</h2>
               </div>
             </div>
-            
-            {/* Theme Toggle in Sidebar Header */}
-            <button
-              onClick={toggleTheme}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-color)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:scale-105 transition-all"
-              title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
-            >
-              {theme === 'dark' ? <Sun size={18} strokeWidth={1.5} /> : <Moon size={18} strokeWidth={1.5} />}
-            </button>
-          </div>
-
-          {/* User Card */}
-          <div className="bg-[var(--bg-color)] border border-[var(--border-color)] rounded-xl p-4 mb-8">
-            <div className="text-sm font-bold text-[var(--text-primary)]">{user?.nama || 'User'}</div>
-            <div className="text-xs font-medium text-[var(--text-secondary)] mb-3">@{user?.username}</div>
-            <div>{getRoleBadge(user?.role)}</div>
           </div>
 
           {/* Navigation Links */}
@@ -107,13 +91,29 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           </nav>
         </div>
 
-        {/* Logout Button */}
-        <button
-          className="flex items-center gap-3 px-4 py-3 rounded-full font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all mt-4"
-          onClick={() => setIsLogoutModalOpen(true)}
-        >
-          <LogOut size={18} /> Keluar (Logout)
-        </button>
+        <div className="flex flex-col gap-3 mt-4">
+          {/* User Card & Theme Toggle */}
+          <div className="bg-[var(--bg-color)] border border-[var(--border-color)] rounded-xl p-4 relative">
+            <button
+              onClick={toggleTheme}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:scale-105 transition-all shadow-sm"
+              title={`Beralih ke ${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}`}
+            >
+              {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
+            </button>
+            <div className="text-sm font-bold text-[var(--text-primary)] pr-10 truncate">{user?.nama || 'User'}</div>
+            <div className="text-xs font-medium text-[var(--text-secondary)] mb-3 truncate">@{user?.username}</div>
+            <div>{getRoleBadge(user?.role)}</div>
+          </div>
+
+          {/* Logout Button */}
+          <button
+            className="flex items-center gap-3 px-4 py-3 rounded-full font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all w-full justify-start"
+            onClick={() => setIsLogoutModalOpen(true)}
+          >
+            <LogOut size={18} /> Keluar (Logout)
+          </button>
+        </div>
       </aside>
 
       {/* 2. Mobile Bottom Navigation Bar */}
