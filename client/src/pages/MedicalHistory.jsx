@@ -20,6 +20,10 @@ const MedicalHistory = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
+  // Search & Category Filter State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterKategori, setFilterKategori] = useState('');
+
   // Modal State
   const [isDeductModalOpen, setIsDeductModalOpen] = useState(false);
   const [karyawans, setKaryawans] = useState([]);
@@ -226,6 +230,15 @@ const MedicalHistory = () => {
   const filteredHistory = history.filter(h => {
     if (startDate && new Date(h.tanggal) < new Date(startDate)) return false;
     if (endDate && new Date(h.tanggal) > new Date(endDate)) return false;
+    if (filterKategori && h.kategori !== filterKategori) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      const matchName = h.nama_lengkap?.toLowerCase().includes(q);
+      const matchNik = h.nik?.toLowerCase().includes(q);
+      const matchDesk = h.deskripsi?.toLowerCase().includes(q);
+      const matchPic = h.pic_name?.toLowerCase().includes(q);
+      if (!matchName && !matchNik && !matchDesk && !matchPic) return false;
+    }
     return true;
   });
 
@@ -322,6 +335,59 @@ const MedicalHistory = () => {
           {isEditAllowed && (
             <button className="btn btn-primary" onClick={handleOpenAddModal}>
               <Plus size={18} /> Add Medical History
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Search & Filter Bar */}
+      <div className="glass-card" style={{ marginBottom: '1.25rem', padding: '1rem 1.25rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Keyword Search */}
+          <div style={{ flex: '1 1 220px', position: 'relative' }}>
+            <Search size={16} color="var(--text-secondary)" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              id="medical-history-search"
+              type="text"
+              className="form-control"
+              placeholder="Cari Nama, NIK, Deskripsi..."
+              style={{ paddingLeft: '2.2rem' }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {/* Kategori Filter */}
+          <div style={{ flex: '1 1 160px' }}>
+            <select
+              id="medical-history-kategori-filter"
+              className="form-control"
+              value={filterKategori}
+              onChange={(e) => setFilterKategori(e.target.value)}
+            >
+              <option value="">Semua Kategori</option>
+              <option value="Rawat Inap Total">Rawat Inap Total</option>
+              <option value="Rawat Inap Kamar">Rawat Inap Kamar</option>
+              <option value="Rawat Jalan">Rawat Jalan</option>
+              <option value="Kacamata">Kacamata</option>
+              <option value="Persalinan">Persalinan</option>
+            </select>
+          </div>
+
+          {/* Result Count */}
+          <div style={{ fontSize: '0.82em', color: 'var(--text-secondary)', flexShrink: 0, whiteSpace: 'nowrap' }}>
+            {filteredHistory.length} hasil ditemukan
+          </div>
+
+          {/* Reset Button */}
+          {(searchQuery || filterKategori) && (
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={() => { setSearchQuery(''); setFilterKategori(''); }}
+              title="Reset Filter"
+              style={{ flexShrink: 0 }}
+            >
+              <X size={14} /> Reset
             </button>
           )}
         </div>
