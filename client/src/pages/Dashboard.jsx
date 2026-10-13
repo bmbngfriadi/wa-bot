@@ -616,7 +616,6 @@ const Dashboard = () => {
                 <th>No</th>
                 <th>NIK</th>
                 <th>Nama Lengkap</th>
-                <th>Jenis Kelamin</th>
                 <th>Department</th>
                 <th>Gol.</th>
                 <th>Keluarga (Istri / Anak)</th>
