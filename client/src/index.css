@@ -203,6 +203,10 @@
   .data-table tbody tr {
     @apply hover:bg-[var(--bg-color)] transition-colors;
   }
+  .table-row-hover:hover {
+    background-color: var(--bg-color) !important;
+    transition: background-color 0.15s ease;
+  }
   
   @media (max-width: 768px) {
     .data-table {

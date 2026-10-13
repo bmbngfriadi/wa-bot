@@ -640,9 +640,14 @@ const Dashboard = () => {
                 employees.map((emp, index) => {
                   const isSelected = selectedIds.includes(emp.id) || isSelectAllFiltered;
                   return (
-                    <tr key={emp.id} style={{ backgroundColor: isSelected ? 'rgba(181, 29, 34, 0.08)' : 'transparent' }}>
+                    <tr
+                      key={emp.id}
+                      style={{ backgroundColor: isSelected ? 'rgba(181, 29, 34, 0.08)' : 'transparent', cursor: 'pointer' }}
+                      onClick={() => handleOpenEdit(emp)}
+                      className="table-row-hover"
+                    >
                       {isBulkDeleteAllowed && (
-                        <td data-label="Pilih" className="text-left md:text-center">
+                        <td data-label="Pilih" className="text-left md:text-center" onClick={(e) => e.stopPropagation()}>
                           <input
                             type="checkbox"
                             checked={isSelected}
@@ -668,7 +673,7 @@ const Dashboard = () => {
                           {emp.status}
                         </span>
                       </td>
-                      <td data-label="Aksi" className="text-left sm:text-center">
+                      <td data-label="Aksi" className="text-left sm:text-center" onClick={(e) => e.stopPropagation()}>
                         <div className="flex flex-col sm:flex-row sm:justify-center gap-2">
                           {/* Edit Status & Data Button */}
                           {isEditAllowed ? (
