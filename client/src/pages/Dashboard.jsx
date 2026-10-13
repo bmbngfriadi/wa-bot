@@ -627,13 +627,13 @@ const Dashboard = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+                  <td colSpan={isBulkDeleteAllowed ? "9" : "8"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Memuat data karyawan...
                   </td>
                 </tr>
               ) : employees.length === 0 ? (
                 <tr>
-                  <td colSpan={isBulkDeleteAllowed ? "10" : "9"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+                  <td colSpan={isBulkDeleteAllowed ? "9" : "8"} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
                     Tidak ada data karyawan ditemukan.
                   </td>
                 </tr>
@@ -655,19 +655,7 @@ const Dashboard = () => {
                       <td data-label="No">{(page - 1) * 10 + index + 1}</td>
                       <td data-label="NIK" style={{ fontWeight: 700, fontFamily: 'monospace', color: 'var(--primary-500)' }}>{emp.nik}</td>
                       <td data-label="Nama Lengkap" style={{ fontWeight: 600 }}>{emp.nama_lengkap}</td>
-                      <td data-label="Jenis Kelamin">
-                        <span style={{
-                          fontSize: '0.8em',
-                          fontWeight: 600,
-                          padding: '0.2rem 0.6rem',
-                          borderRadius: '4px',
-                          background: emp.jenis_kelamin === 'Perempuan' ? 'rgba(236, 72, 153, 0.15)' : 'rgba(59, 130, 246, 0.15)',
-                          color: emp.jenis_kelamin === 'Perempuan' ? '#ec4899' : '#3b82f6',
-                          border: `1px solid ${emp.jenis_kelamin === 'Perempuan' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`
-                        }}>
-                          {emp.jenis_kelamin || 'Laki-laki'}
-                        </span>
-                      </td>
+
                       <td data-label="Department">{emp.department}</td>
                       <td data-label="Golongan"><span style={{fontWeight: 'bold', color: 'var(--primary-500)'}}>{emp.golongan || '4 (A-B)'}</span></td>
                       <td data-label="Keluarga" style={{ fontSize: '0.8em', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
